@@ -1,0 +1,21 @@
+---
+- name: Copy SSH key and verify connectivity
+  hosts: test_server
+  tasks:
+    - name: Copy SSH key to target hosts
+      command: ssh-copy-id -i ~/.ssh/ansible.pub {{ inventory_hostname }}
+      delegate_to: localhost
+      ignore_errors: yes
+
+    - name: Wait for SSH to be available
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 22
+        timeout: 60
+        state: started
+
+    - name: Ping test group hosts
+      ansible.builtin.command:
+        cmd: ansible {{ inventory_hostname }} -m ping --key-file ~/.ssh/ansible
+      delegate_to: localhost
+      ignore_errors: yes
