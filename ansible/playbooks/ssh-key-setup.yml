@@ -1,0 +1,33 @@
+---
+- name: Copy SSH key and verify connectivity
+  hosts: "*"
+  tasks:
+    - name: Read the contents of the authorized_keys file
+      slurp:
+        path: ~/.ssh/authorized_keys
+      register: authorized_keys_contents
+
+    - name: Decode the authorized_keys contents
+      set_fact:
+        authorized_keys_decoded: "{{ authorized_keys_contents.content | b64decode }}"
+    
+    - name: Copy SSH key to target hosts
+      command: ssh-copy-id -i ~/.ssh/ansible.pub {{ inventory_hostname }}
+      delegate_to: localhost
+      ignore_errors: yes
+      when: "'ansible' not in authorized_keys_decoded"
+
+    - name: Wait for SSH to be available
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 22
+        timeout: 60
+        state: started
+      when: "'ansible' not in authorized_keys_decoded"
+
+    - name: Ping test group hosts using copied SSH key
+      ansible.builtin.command:
+        cmd: ansible {{ inventory_hostname }} -m ping --key-file ~/.ssh/ansible
+      delegate_to: localhost
+      ignore_errors: yes
+      when: "'ansible' not in authorized_keys_decoded"
