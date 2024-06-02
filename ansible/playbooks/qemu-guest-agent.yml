@@ -1,7 +1,7 @@
 ---
 - name: Install latest qemu-guest-agent
   hosts: "*"
-  become: true
+  become: yes
   vars_files:
     - ~/.ansible/vault/ansible_become_pass.yml
   tasks: 
