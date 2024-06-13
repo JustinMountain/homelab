@@ -12,13 +12,13 @@
         authorized_keys_decoded: "{{ authorized_keys_contents.content | b64decode }}"
     
     - name: Copy Ansible SSH key to target hosts
-      command: ssh-copy-id -i ~/.ssh/ansible.pub {{ inventory_hostname }}
+      command: ssh-copy-id -i ~/.ssh/ansible.pub {{ ansible_user }}@{{ inventory_hostname }}
       delegate_to: localhost
       ignore_errors: yes
       when: "'ansible' not in authorized_keys_decoded"
 
     - name: Copy admin SSH key to target hosts
-      command: ssh-copy-id -f -i ~/.ssh/admin.pub {{ inventory_hostname }}
+      command: ssh-copy-id -f -i ~/.ssh/admin.pub {{ ansible_user }}@{{ inventory_hostname }}
       delegate_to: localhost
       ignore_errors: yes
       when: "'admin' not in authorized_keys_decoded"
