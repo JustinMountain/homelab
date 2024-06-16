@@ -1,0 +1,14 @@
+---
+- name: Init server from fresh Ubuntu install
+  hosts: "*"
+  vars_files:
+  - ~/.ansible/vault/ansible_ssh_pass.yml
+  - ~/.ansible/vault/ansible_become_pass.yml
+  roles:
+    - role: ssh_key_copy
+    - role: disable_password_login
+      become: yes
+    - role: apt_update_upgrade
+      become: yes
+    - role: qemu_guest_agent
+      become: yes
