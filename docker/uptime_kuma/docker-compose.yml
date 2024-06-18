@@ -1,0 +1,15 @@
+---
+services:
+  uptime_kuma:
+    container_name: uptime-kuma
+    image: louislam/uptime-kuma:1
+    ports:
+      - 3001:3001
+    volumes:
+      - uptime_kuma:/app/data
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+
+volumes:
+  uptime_kuma:
