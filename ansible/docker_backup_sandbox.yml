@@ -1,0 +1,15 @@
+---
+- name: Backup docker volumes on sandbox
+  hosts: "sandbox"
+  vars_files:
+  - ~/.ansible/vault/ansible_become_pass.yml
+  roles:
+  - role: docker_compose_backup
+    become: yes
+    vars:
+      stack_name: "uptime_kuma"
+
+  - role: docker_compose_backup
+    become: yes
+    vars:
+      stack_name: "open_webui"
