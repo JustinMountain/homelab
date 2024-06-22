@@ -13,44 +13,44 @@
   set_fact:
     docker_compose_content: "{{ docker_compose_file.content | b64decode | from_yaml }}"
 
-- name: Extract {{ stack_name }} volume names
+- name: Extract {{ stack_name }} service names
   set_fact:
-    volume_names: "{{ docker_compose_content.volumes.keys() | list }}"
+    service_names: "{{ docker_compose_content.services.keys() | list }}"
 
 # - name: Display volume names (debugging purposes)
 #   debug:
-#     msg: "{{ volume_names }}"
+#     msg: "{{ service_names }}"
 
 # - name: Print out the appropriate name
 #   debug:
 #     msg: "{{ stack_name }}_{{ item }}"
-#   loop: "{{ volume_names }}"
+#   loop: "{{ service_names }}"
 
-- name: Copy Docker Volumes for {{ stack_name }} to backup directory
+- name: Copy Docker mounted directories for {{ stack_name }} to backup directory
   block:
     - name: Ensure {{ stack_name }} backup directories exist
       file:
         path: "/home/justin/backups/docker/{{ stack_name }}/{{ item }}"
         state: directory
-      with_items: "{{ volume_names }}"
+      with_items: "{{ service_names }}"
 
-    - name: Check if {{ stack_name }} volumes exist
+    - name: Check if {{ stack_name }} mount points exist
       stat:
-        path: "/var/lib/docker/volumes/{{ stack_name }}_{{ item }}"
-      with_items: "{{ volume_names }}"
-      register: volume_exists
+        path: "/home/justin/backups/docker/{{ stack_name }}/{{ item }}"
+      with_items: "{{ service_names }}"
+      register: service_exists
 
-    - name: Copy {{ stack_name }} volume(s) to backup directory
+    - name: Copy {{ stack_name }} mounted directories to backup directory
       ansible.builtin.command:
-        cmd: cp -r /var/lib/docker/volumes/{{ stack_name }}_{{ item.item }} /home/justin/backups/docker/{{ stack_name }}/{{ item.item }}/{{ item.item }}-backup-{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}-{{ ansible_date_time.second }}
-      with_items: "{{ volume_exists.results }}"
+        cmd: cp -r /home/justin/{{ stack_name }}/data /home/justin/backups/docker/{{ stack_name }}/{{ item.item }}/{{ item.item }}-backup-{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}-{{ ansible_date_time.second }}
+      with_items: "{{ service_exists.results }}"
       when: item.stat.exists
 
     # # Debug
     # - name: Display volume existence message when present
     #   debug:
     #     msg: "{{ stack_name }}_{{ item.item }}"
-    #   with_items: "{{ volume_exists.results }}"
+    #   with_items: "{{ service_exists.results }}"
     #   when: item.stat.exists
 
 - name: Deploy {{ stack_name }} Docker Compose stack

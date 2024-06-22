@@ -6,10 +6,7 @@ services:
     ports:
       - 3001:3001
     volumes:
-      - frontend:/app/data
+      - ./data/frontend:/app/data
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
-
-volumes:
-  frontend:

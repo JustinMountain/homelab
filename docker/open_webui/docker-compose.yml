@@ -9,7 +9,7 @@ services:
       - OPENAI_API_BASE_URLS=${OPENAI_URL};${PIPELINE_URL}
       - OPENAI_API_KEYS=${OPENAI_API_KEY};${PIPELINE_API_KEY}
     volumes:
-      - frontend:/app/backend/data
+      - ./data/frontend:/app/backend/data
     restart: unless-stopped
 
   pipelines:
@@ -18,11 +18,7 @@ services:
     # ports:
       # - "9099:9099"
     volumes:
-      - pipelines:/app/pipelines
+      - ./data/pipelines:/app/pipelines
     # extra_hosts:
       # - "host.docker.internal:host-gateway"
     restart: unless-stopped
-
-volumes:
-  frontend:
-  pipelines:
