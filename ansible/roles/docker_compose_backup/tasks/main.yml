@@ -42,7 +42,7 @@
 
     - name: Copy {{ stack_name }} mounted directories to backup directory
       ansible.builtin.command:
-        cmd: cp -r /home/justin/{{ stack_name }}/data /home/justin/backups/docker/{{ stack_name }}/{{ item.item }}/{{ item.item }}-backup-{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}-{{ ansible_date_time.second }}
+        cmd: cp -r /home/justin/{{ stack_name }}/data/{{ item.item }} /home/justin/backups/docker/{{ stack_name }}/{{ item.item }}/{{ item.item }}-backup-{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}-{{ ansible_date_time.second }}
       with_items: "{{ service_exists.results }}"
       when: item.stat.exists
 
