@@ -1,5 +1,5 @@
 ---
-- name: Copy {{ stack_name }} docker-compose.yml to remote host
+- name: Ensure up to date {{ stack_name }} docker-compose.yml is on remote host
   ansible.builtin.copy:
     src: ~/homelab/docker/{{ stack_name }}/docker-compose.yml
     dest: /home/justin/{{ stack_name }}/docker-compose.yml

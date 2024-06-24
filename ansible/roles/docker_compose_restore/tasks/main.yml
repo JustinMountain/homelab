@@ -17,29 +17,18 @@
   set_fact:
     service_names: "{{ docker_compose_content.services.keys() | list }}"
 
-# - name: Display volume names (debugging purposes)
-#   debug:
-#     msg: "{{ service_names }}"
-
-# - name: Print out the appropriate name
-#   debug:
-#     msg: "{{ stack_name }}_{{ item }}"
-#   loop: "{{ service_names }}"
-
-- name: Restore most recesnt Docker Volume backups for {{ stack_name }}
+- name: Restore most recent Docker Volume backups for {{ stack_name }}
   block:
 
-    # Check if there is a volume for this item active in the appropriate spot
     - name: Check if {{ stack_name }} volumes exist
       stat:
-        path: "/home/justin/{{ stack_name }}/data/{{ item }}"
+        path: "/home/justin/{{ stack_name }}/{{ item }}"
       loop: "{{ service_names }}"
       register: volume_exists
       loop_control:
         label: "{{ item }}"
 
-    # Confirm there is at least backup file at the location
-    - name: Ensure at least one backup file exists
+    - name: Ensure at least one backup exists for {{ stack_name }} volumes
       stat:
         path: "/home/justin/backups/docker/{{ stack_name }}/{{ item }}"
       loop: "{{ service_names }}"
@@ -47,8 +36,7 @@
       loop_control:
         label: "{{ item }}"
 
-    # Find the newest working backup file
-    - name: Find all backup volumes
+    - name: Find all backup volumes for {{ stack_name }}
       find:
         paths: "/home/justin/backups/docker/{{ stack_name }}/{{ item }}"
         patterns: "{{ item }}-backup-*"
@@ -60,11 +48,11 @@
       loop_control:
         label: "{{ item }}"
 
-    - name: Initialize newest_backup_files
+    - name: Initialize newest_backup_files dictionary
       set_fact:
         newest_backup_files: {}
 
-    - name: Find the most recent backup for each volume
+    - name: Find the most recent backup for each {{ stack_name }} volume
       set_fact:
         newest_backup_files: "{{ newest_backup_files | combine({ item.item: (item.files | sort(attribute='mtime', reverse=True) | first).path }) }}"
       loop: "{{ backup_volumes.results }}"
@@ -72,12 +60,11 @@
       loop_control:
         label: "{{ item.item }}"
 
-    - name: Display newest backup files (debugging purposes)
-      debug:
-        msg: "{{ newest_backup_files.frontend | basename }}"
+    # - name: Display newest backup files (debugging purposes)
+    #   debug:
+    #     msg: "{{ newest_backup_files.frontend | basename }}"
 
-    # Fail Condition
-    - name: Fail if no backup files are found
+    - name: Fail if no backup files are found for {{ stack_name }}
       fail:
         msg: "No backup files found for {{ stack_name }}"
       when: newest_backup_files is not defined or newest_backup_files == ""
@@ -86,29 +73,26 @@
     #   debug:
     #     msg: "{{ volume_exists.results }}"
 
-    # Remove existing volume
-    - name: Remove existing volumes
-      command: "rm -r /home/justin/{{ stack_name }}/data/{{ item.item }}"
+    - name: Remove existing volumes for {{ stack_name }}
+      command: "rm -r /home/justin/{{ stack_name }}/{{ item.item }}"
       when: item.stat.exists
       loop: "{{ volume_exists.results }}"
       loop_control:
         label: "{{ item.item }}"
 
-    # Copy it to the default spot and remane it as appropriate
-    # Copy the newest backup files to the appropriate volume directory
-    - name: Copy the newest backup files to /var/lib/docker/volumes
+    - name: Copy the newest backup files for {{ stack_name }} to docker mount point
       copy:
         src: "{{ item.value }}"
-        dest: "/home/justin/{{ stack_name }}/data"
+        dest: "/home/justin/{{ stack_name }}"
         remote_src: yes
       with_dict: "{{ newest_backup_files }}"
       loop_control:
         label: "{{ item.key }}"
 
-    - name: Rename the directory
-      command: mv /home/justin/{{ stack_name }}/data/{{ item.value | basename }} /home/justin/{{ stack_name }}/data/{{ item.key }}
+    - name: Rename the backup directory for {{ stack_name }}
+      command: mv /home/justin/{{ stack_name }}/{{ item.value | basename }} /home/justin/{{ stack_name }}/{{ item.key }}
       args:
-        creates: /home/justin/{{ stack_name }}/data/{{ item.key }}
+        creates: /home/justin/{{ stack_name }}/{{ item.key }}
       with_dict: "{{ newest_backup_files }}"
       loop_control:
         label: "{{ item.key }}"
