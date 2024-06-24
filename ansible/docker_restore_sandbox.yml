@@ -1,6 +1,8 @@
 ---
 - name: Restore most recent docker volume backup on sandbox
   hosts: "sandbox"
+  vars:
+    user_home: "/home/justin"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:

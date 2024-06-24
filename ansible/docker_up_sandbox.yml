@@ -1,6 +1,8 @@
 ---
 - name: Ensure the Sandbox stack of Docker containers up to date on target
   hosts: "sandbox"
+  vars:
+    user_home: "/home/justin"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:

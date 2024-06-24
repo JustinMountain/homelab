@@ -1,12 +1,12 @@
 ---
 - name: Tear down {{ stack_name }} Docker Compose stack
   community.docker.docker_compose_v2:
-    project_src: /home/justin/{{ stack_name }}
+    project_src: "{{ user_home }}/{{ stack_name }}"
     state: absent
 
 - name: Read the {{ stack_name }} docker-compose.yml file
   slurp:
-    src: /home/justin/{{ stack_name }}/docker-compose.yml
+    src: "{{ user_home }}/{{ stack_name }}/docker-compose.yml"
   register: docker_compose_file
 
 - name: Parse the {{ stack_name }} docker-compose.yml file
@@ -22,7 +22,7 @@
 
     - name: Check if {{ stack_name }} volumes exist
       stat:
-        path: "/home/justin/{{ stack_name }}/{{ item }}"
+        path: "{{ user_home }}/{{ stack_name }}/{{ item }}"
       loop: "{{ service_names }}"
       register: volume_exists
       loop_control:
@@ -30,7 +30,7 @@
 
     - name: Ensure at least one backup exists for {{ stack_name }} volumes
       stat:
-        path: "/home/justin/backups/docker/{{ stack_name }}/{{ item }}"
+        path: "{{ user_home }}/backups/docker/{{ stack_name }}/{{ item }}"
       loop: "{{ service_names }}"
       register: backup_files
       loop_control:
@@ -38,7 +38,7 @@
 
     - name: Find all backup volumes for {{ stack_name }}
       find:
-        paths: "/home/justin/backups/docker/{{ stack_name }}/{{ item }}"
+        paths: "{{ user_home }}/backups/docker/{{ stack_name }}/{{ item }}"
         patterns: "{{ item }}-backup-*"
         recurse: no
         file_type: directory
@@ -74,7 +74,7 @@
     #     msg: "{{ volume_exists.results }}"
 
     - name: Remove existing volumes for {{ stack_name }}
-      command: "rm -r /home/justin/{{ stack_name }}/{{ item.item }}"
+      command: "rm -r {{ user_home }}/{{ stack_name }}/{{ item.item }}"
       when: item.stat.exists
       loop: "{{ volume_exists.results }}"
       loop_control:
@@ -83,21 +83,21 @@
     - name: Copy the newest backup files for {{ stack_name }} to docker mount point
       copy:
         src: "{{ item.value }}"
-        dest: "/home/justin/{{ stack_name }}"
+        dest: "{{ user_home }}/{{ stack_name }}"
         remote_src: yes
       with_dict: "{{ newest_backup_files }}"
       loop_control:
         label: "{{ item.key }}"
 
     - name: Rename the backup directory for {{ stack_name }}
-      command: mv /home/justin/{{ stack_name }}/{{ item.value | basename }} /home/justin/{{ stack_name }}/{{ item.key }}
+      command: mv {{ user_home }}/{{ stack_name }}/{{ item.value | basename }} {{ user_home }}/{{ stack_name }}/{{ item.key }}
       args:
-        creates: /home/justin/{{ stack_name }}/{{ item.key }}
+        creates: "{{ user_home }}/{{ stack_name }}/{{ item.key }}"
       with_dict: "{{ newest_backup_files }}"
       loop_control:
         label: "{{ item.key }}"
 
 - name: Deploy {{ stack_name }} Docker Compose stack
   community.docker.docker_compose_v2:
-    project_src: /home/justin/{{ stack_name }}
+    project_src: "{{ user_home }}/{{ stack_name }}"
     state: present

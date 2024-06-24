@@ -1,6 +1,8 @@
 ---
 - name: Tear down the Sandbox stack of Docker containers on target
   hosts: "sandbox"
+  vars:
+    user_home: "/home/justin"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:

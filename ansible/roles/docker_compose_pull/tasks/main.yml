@@ -1,12 +1,12 @@
 ---
 - name: Ensure up to date {{ stack_name }} docker-compose.yml is on remote host
   ansible.builtin.copy:
-    src: ~/homelab/docker/{{ stack_name }}/docker-compose.yml
-    dest: /home/justin/{{ stack_name }}/docker-compose.yml
+    src: "~/homelab/docker/{{ stack_name }}/docker-compose.yml"
+    dest: "{{ user_home }}/{{ stack_name }}/docker-compose.yml"
     mode: 0755
 
 - name: Deploy {{ stack_name }} Docker Compose stack
   community.docker.docker_compose_v2:
-    project_src: /home/justin/{{ stack_name }}
+    project_src: "{{ user_home }}/{{ stack_name }}"
     pull: always
     state: present

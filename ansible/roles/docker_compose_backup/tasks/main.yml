@@ -1,12 +1,12 @@
 ---
 - name: Tear down {{ stack_name }} Docker Compose stack
   community.docker.docker_compose_v2:
-    project_src: /home/justin/{{ stack_name }}
+    project_src: "{{ user_home }}/{{ stack_name }}"
     state: absent
 
 - name: Read the {{ stack_name }} docker-compose.yml file
   slurp:
-    src: /home/justin/{{ stack_name }}/docker-compose.yml
+    src: "{{ user_home }}/{{ stack_name }}/docker-compose.yml"
   register: docker_compose_file
 
 - name: Parse the {{ stack_name }} docker-compose.yml file
@@ -30,19 +30,19 @@
   block:
     - name: Ensure {{ stack_name }} backup directories exist
       file:
-        path: "/home/justin/backups/docker/{{ stack_name }}/{{ item }}"
+        path: "{{ user_home }}/backups/docker/{{ stack_name }}/{{ item }}"
         state: directory
       with_items: "{{ service_names }}"
 
     - name: Check if {{ stack_name }} mount points exist
       stat:
-        path: "/home/justin/backups/docker/{{ stack_name }}/{{ item }}"
+        path: "{{ user_home }}/backups/docker/{{ stack_name }}/{{ item }}"
       with_items: "{{ service_names }}"
       register: service_exists
 
     - name: Copy {{ stack_name }} mounted directories to backup directory
       ansible.builtin.command:
-        cmd: cp -r /home/justin/{{ stack_name }}/{{ item.item }} /home/justin/backups/docker/{{ stack_name }}/{{ item.item }}/{{ item.item }}-backup-{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}-{{ ansible_date_time.second }}
+        cmd: "cp -r {{ user_home }}/{{ stack_name }}/{{ item.item }} {{ user_home }}/backups/docker/{{ stack_name }}/{{ item.item }}/{{ item.item }}-backup-{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}-{{ ansible_date_time.second }}"
       with_items: "{{ service_exists.results }}"
       when: item.stat.exists
 
@@ -55,5 +55,5 @@
 
 - name: Deploy {{ stack_name }} Docker Compose stack
   community.docker.docker_compose_v2:
-    project_src: /home/justin/{{ stack_name }}
+    project_src: "{{ user_home }}/{{ stack_name }}"
     state: present
