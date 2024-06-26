@@ -1,0 +1,55 @@
+---
+- name: Read the {{ stack_name }} docker-compose.yml file
+  slurp:
+    src: "{{ user_home }}/{{ stack_name }}/docker-compose.yml"
+  register: docker_compose_file
+
+- name: Parse the {{ stack_name }} docker-compose.yml file
+  set_fact:
+    docker_compose_content: "{{ docker_compose_file.content | b64decode | from_yaml }}"
+
+- name: Extract {{ stack_name }} service names
+  set_fact:
+    service_names: "{{ docker_compose_content.services.keys() | list }}"
+
+- name: Restore most recent Docker Volume backups for {{ stack_name }}
+  block:
+    - name: Ensure at least one backup exists for {{ stack_name }} volumes
+      stat:
+        path: "{{ user_home }}/backups/docker/{{ stack_name }}/{{ item }}"
+      loop: "{{ service_names }}"
+      register: backup_files
+      loop_control:
+        label: "{{ item }}"
+
+    - name: Find all backup volumes for {{ stack_name }}
+      find:
+        paths: "{{ user_home }}/backups/docker/{{ stack_name }}/{{ item }}"
+        patterns: "{{ item }}-backup-*"
+        recurse: no
+        file_type: directory
+      when: backup_files
+      register: backup_volumes
+      loop: "{{ service_names }}"
+      loop_control:
+        label: "{{ item }}"
+
+    - name: Set fact for sorted backup volumes
+      set_fact:
+        sorted_backup_volumes: "{{ backup_volumes.results | map(attribute='files') | flatten | sort(attribute='path', reverse=True) }}"
+
+    - name: Debug backup volumes
+      debug:
+        var: sorted_backup_volumes
+          
+    - name: Initialize skip_delete variable
+      set_fact:
+        skip_delete: []
+
+    - name: Remove existing volumes for {{ stack_name }}
+      command: "rm -r {{ item.path }}"
+      loop: "{{ sorted_backup_volumes }}"
+      when: "(loop_index % 2) == 0"
+      loop_control:
+        label: "{{ item.path }}"
+        index_var: loop_index

@@ -1,5 +1,5 @@
 ---
-- name: Ensure the Sandbox stack of Docker containers are up to date on target
+- name: Prune dangling images from the target hosts
   hosts: "sandbox"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
