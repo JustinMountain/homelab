@@ -1,0 +1,73 @@
+---
+- name: Create a directory for traefik on remote
+  ansible.builtin.file:
+    path: "{{ user_home }}/{{ stack_name }}" 
+    state: directory
+    mode: 0755
+
+- name: Check if traefik .env file is present on host
+  delegate_to: localhost
+  stat:
+    path: "/home/wsl/homelab/docker/{{ stack_name }}/.env"
+  register: env_file
+
+- name: Copy traefik .env to remote host
+  ansible.builtin.copy:
+    src: "/home/wsl/homelab/docker/{{ stack_name }}/.env"
+    dest: "{{ user_home }}/{{ stack_name }}/.env"
+    mode: 0644
+  when: env_file.stat.exists
+
+- name: Check if traefik.yml file is present on host
+  delegate_to: localhost
+  stat:
+    path: "/home/wsl/homelab/docker/{{ stack_name }}/traefik.yml"
+  register: traefik_yml_file
+
+- name: Copy traefik.yml file to remote host
+  ansible.builtin.copy:
+    src: "/home/wsl/homelab/docker/{{ stack_name }}/traefik.yml"
+    dest: "{{ user_home }}/{{ stack_name }}/traefik.yml"
+    mode: 0755
+  when: traefik_yml_file.stat.exists
+
+
+
+
+
+- name: Check if acme.json file is present on host
+  delegate_to: localhost
+  stat:
+    path: "/home/wsl/homelab/docker/{{ stack_name }}/acme.json"
+  register: acme_json
+
+- name: Copy acme.json file to remote host
+  ansible.builtin.copy:
+    src: "/home/wsl/homelab/docker/{{ stack_name }}/acme.json"
+    dest: "{{ user_home }}/{{ stack_name }}/acme.json"
+    mode: 0600
+  when: not acme_json.stat.exists
+
+
+
+
+
+
+- name: Copy {{ stack_name }} docker-compose.yml to remote host
+  ansible.builtin.copy:
+    src: "/home/wsl/homelab/docker/{{ stack_name }}/docker-compose.yml"
+    dest: "{{ user_home }}/{{ stack_name }}/docker-compose.yml"
+    mode: 0755
+
+
+- name: Create Docker network 'proxy' if it does not exist
+  community.docker.docker_network:
+    name: proxy
+    state: present
+
+
+
+- name: Deploy {{ stack_name }} Docker Compose stack
+  community.docker.docker_compose_v2:
+    project_src: "{{ user_home }}/{{ stack_name }}"
+    state: present

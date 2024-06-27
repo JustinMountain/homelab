@@ -1,17 +1,17 @@
 ---
-- name: Ensure the Sandbox stack of Docker containers are up to date on target
+- name: Backup docker volumes on sandbox
   hosts: "sandbox"
   vars:
     user_home: "/home/justin"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
-  - role: docker_compose_pull
+  - role: docker/docker_compose_backup
     become: yes
     vars:
       stack_name: "uptime_kuma"
 
-  - role: docker_compose_pull
+  - role: docker/docker_compose_backup
     become: yes
     vars:
       stack_name: "open_webui"

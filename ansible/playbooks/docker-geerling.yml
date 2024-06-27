@@ -1,8 +1,0 @@
----
-- name: Install Docker using Jeff Geerling's Ansible Role
-  hosts: "*"
-  become: yes
-  vars_files:
-    - ~/.ansible/vault/ansible_become_pass.yml
-  roles:
-    - geerlingguy.docker

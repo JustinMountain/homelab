@@ -4,5 +4,5 @@
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
-  - role: docker_prune
+  - role: docker/docker_prune
     become: yes
