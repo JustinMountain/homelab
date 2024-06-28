@@ -1,0 +1,51 @@
+---
+services:
+  traefik-proxy:
+    image: traefik:v3.0
+    container_name: traefik
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      PORKBUN_SECRET_API_KEY: ${PORKBUN_SECRET_API_KEY}
+      PORKBUN_API_KEY: ${PORKBUN_API_KEY}
+
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.yml:/traefik.yml:ro
+      - ./acme.json:/acme.json
+      # - ./data/config.yml:/config.yml:ro
+    labels:
+      - "traefik.enable=true"
+
+      # HTTP Rules
+      - "traefik.http.routers.traefik.entrypoints=http"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.igarashimountain.com`)"
+
+      - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
+      
+      # HTTPs Rules
+      - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.traefik.middlewares=traefik-https-redirect"
+      - "traefik.http.routers.traefik-secure.entrypoints=https"
+      - "traefik.http.routers.traefik-secure.rule=Host(`traefik.igarashimountain.com`)"
+
+      # Certificate resolution
+      - "traefik.http.routers.traefik-secure.tls=true"
+      - "traefik.http.routers.traefik-secure.tls.certresolver=porkbun"
+      - "traefik.http.routers.traefik-secure.tls.domains[0].main=igarashimountain.com"
+      - "traefik.http.routers.traefik-secure.tls.domains[0].sans=*.igarashimountain.com"
+
+      # Dashboard access
+      - "traefik.http.routers.traefik-secure.service=api@internal"
+
+    restart: unless-stopped
+
+networks:
+  proxy:
+    external: true

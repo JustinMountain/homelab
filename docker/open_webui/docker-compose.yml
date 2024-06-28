@@ -3,11 +3,20 @@ services:
   frontend:
     image: ghcr.io/open-webui/open-webui:main
     container_name: open-webui_frontend
-    ports:
-      - "3000:8080"
+    # ports:
+      # - "3000:8080"
     environment:
       - OPENAI_API_BASE_URLS=${OPENAI_URL};${PIPELINE_URL}
       - OPENAI_API_KEYS=${OPENAI_API_KEY};${PIPELINE_API_KEY}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.chat.rule=Host(`chat.igarashimountain.com`)"
+      - "traefik.http.routers.chat.entrypoints=https"
+      - "traefik.http.routers.chat.tls=true"
+      - "traefik.http.services.chat.loadbalancer.server.port=8080"  
+    networks:
+      - proxy
+      # - open_webui
     volumes:
       - ./frontend:/app/backend/data
     restart: unless-stopped
@@ -19,6 +28,13 @@ services:
       # - "9099:9099"
     volumes:
       - ./pipelines:/app/pipelines
-    # extra_hosts:
-      # - "host.docker.internal:host-gateway"
+    networks:
+      - proxy
+      # - open_webui
     restart: unless-stopped
+
+networks:
+  # open_webui:
+    # external: true
+  proxy:
+    external: true

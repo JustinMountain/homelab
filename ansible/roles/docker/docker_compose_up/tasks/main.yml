@@ -24,6 +24,11 @@
     dest: "{{ user_home }}/{{ stack_name }}/docker-compose.yml"
     mode: 0755
 
+- name: Create Docker network '{{ stack_name }}' if it does not exist
+  community.docker.docker_network:
+    name: "{{ stack_name }}"
+    state: present
+
 - name: Deploy {{ stack_name }} Docker Compose stack
   community.docker.docker_compose_v2:
     project_src: "{{ user_home }}/{{ stack_name }}"
