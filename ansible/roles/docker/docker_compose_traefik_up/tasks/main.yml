@@ -32,6 +32,19 @@
   when: traefik_yml_file.stat.exists
 
 
+- name: Check if config.yml file is present on host
+  delegate_to: localhost
+  stat:
+    path: "/home/wsl/homelab/docker/{{ stack_name }}/config.yml"
+  register: config_yml_file
+
+- name: Copy config.yml file to remote host
+  ansible.builtin.copy:
+    src: "/home/wsl/homelab/docker/{{ stack_name }}/config.yml"
+    dest: "{{ user_home }}/{{ stack_name }}/config.yml"
+    mode: 0755
+  when: config_yml_file.stat.exists
+
 
 
 
@@ -81,3 +94,4 @@
   community.docker.docker_compose_v2:
     project_src: "{{ user_home }}/{{ stack_name }}"
     state: present
+    recreate: always

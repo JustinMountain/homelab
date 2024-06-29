@@ -13,13 +13,12 @@ services:
     environment:
       PORKBUN_SECRET_API_KEY: ${PORKBUN_SECRET_API_KEY}
       PORKBUN_API_KEY: ${PORKBUN_API_KEY}
-
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik.yml:/traefik.yml:ro
       - ./acme.json:/acme.json
-      # - ./data/config.yml:/config.yml:ro
+      - ./config.yml:/config.yml:ro
     labels:
       - "traefik.enable=true"
 
