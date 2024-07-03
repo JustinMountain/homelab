@@ -42,6 +42,8 @@
       debug:
         var: sorted_backup_volumes
           
+
+    # Is this necessary?
     - name: Initialize skip_delete variable
       set_fact:
         skip_delete: []

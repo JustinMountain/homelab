@@ -18,3 +18,6 @@
 
     - role: geerlingguy.docker
       become: yes
+
+    - role: init/set_static_ip
+      become: yes

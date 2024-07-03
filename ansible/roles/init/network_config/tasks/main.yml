@@ -1,0 +1,30 @@
+---
+- name: Ensure at least one file exists at /etc/netplan
+  stat:
+    path: "/etc/netplan"
+  register: network_config_exists
+
+- name: Find network_config file for remote
+  find:
+    paths: "/etc/netplan"
+    patterns: "0*"
+    recurse: no
+    file_type: file
+  when: network_config_exists
+  register: network_configs
+
+# - name: Debug backup volumes
+#   debug:
+#     msg: "{{ network_configs.files[0].path }}"
+    
+- name: Copy network configuration template to remote server
+  template:
+    src: network_config.j2
+    dest: "{{ network_configs.files[0].path }}"
+  # notify: Restart Server
+
+- name: Apply Netplan configuration
+  command: netplan apply
+  become: yes
+  async: 1
+  poll: 0
