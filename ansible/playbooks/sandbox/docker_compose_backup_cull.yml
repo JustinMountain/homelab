@@ -1,11 +1,16 @@
 ---
 - name: Cull every second volume backup for specified docker compose stacks
   hosts: "sandbox"
-  vars:
-    user_home: "/home/justin"
+  # vars:
+  #   user_home: "/home/justin"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
+  - role: docker/docker_compose_backup_cull
+    become: yes
+    vars:
+      stack_name: "traefik"
+
   - role: docker/docker_compose_backup_cull
     become: yes
     vars:

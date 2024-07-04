@@ -1,6 +1,6 @@
 ---
 services:
-  frontend:
+  uptime:
     container_name: uptime-kuma
     image: louislam/uptime-kuma:1
     # ports:
@@ -14,7 +14,7 @@ services:
     networks:
       - proxy
     volumes:
-      - ./frontend:/app/data
+      - ./uptime:/app/data
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
