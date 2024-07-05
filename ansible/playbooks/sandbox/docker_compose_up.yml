@@ -21,7 +21,7 @@
     vars:
       stack_name: "open_webui"
 
-  # - role: docker/docker_compose_up
-  #   become: yes
-  #   vars:
-  #     stack_name: "homepage"
+  - role: docker/docker_compose_up
+    become: yes
+    vars:
+      stack_name: "homepage"

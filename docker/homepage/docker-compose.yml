@@ -1,0 +1,26 @@
+---
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    # ports:
+      # - 3000:3000
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homepage.rule=Host(`homepage.igarashimountain.com`)"
+      - "traefik.http.routers.homepage.entrypoints=https"
+      - "traefik.http.routers.homepage.tls=true"
+      - "traefik.http.services.homepage.loadbalancer.server.port=3000"  
+    networks:
+      - proxy
+    volumes:
+      - ./homepage:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro 
+    restart: unless-stopped
+
+networks:
+  proxy:
+    external: true
