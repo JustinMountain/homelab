@@ -5,6 +5,7 @@ services:
     container_name: homepage
     # ports:
       # - 3000:3000
+    env_file: .env
     environment:
       PUID: ${PUID}
       PGID: ${PGID}

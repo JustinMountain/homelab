@@ -45,8 +45,6 @@
     mode: 0755
   when: data_dir.stat.exists
 
-
-
 - name: Check if acme.json file is present on remote (for traefik)
   stat:
     path: "{{ user_home }}/{{ stack_name }}/{{ stack_name }}/acme.json"
@@ -63,7 +61,6 @@
     - stack_name == 'traefik'
     - not acme_json.stat.exists
 
-
 - name: Copy {{ stack_name }}/data contents to remote
   copy:
     src: "{{ item.path }}"
@@ -72,8 +69,6 @@
   when:
     - data_dir.stat.exists
     - item.path | basename != 'acme.json'
-
-
 
 - name: Create Docker network 'proxy' if it does not exist
   community.docker.docker_network:
@@ -84,3 +79,4 @@
   community.docker.docker_compose_v2:
     project_src: "{{ user_home }}/{{ stack_name }}"
     state: present
+    # recreate: "always" # For testing config changes

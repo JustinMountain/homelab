@@ -22,45 +22,27 @@
   - Uptime Kuma:
       icon: uptime-kuma.svg
       href: "{{HOMEPAGE_VAR_UPTIME_URL}}"
-      description: Monitor service uptime
+      description: service uptime
       siteMonitor: "{{HOMEPAGE_VAR_UPTIME_URL}}"
       widget:
         type: uptimekuma
         url: "{{HOMEPAGE_VAR_UPTIME_URL}}"
-        slug: statuspageslug
+        slug: "{{HOMEPAGE_VAR_UPTIME_SLUG}}"
 - Networking:
-  - OpenWRT:
-      icon: openwrt.svg
-      href: "{{HOMEPAGE_VAR_OPENWRT_URL}}"
-      description: traefik dashboard
-      siteMonitor: "{{HOMEPAGE_VAR_OPENWRT_URL}}"
-      widget:
-        type: openwrt
-        url: "{{HOMEPAGE_VAR_OPENWRT_URL}}"
-        username: homepage
-        password: pass
   - PiHole:
       icon: pi-hole.svg
       href: "{{HOMEPAGE_VAR_PIHOLE_URL}}"
-      description: traefik dashboard
+      description: dns
       siteMonitor: "{{HOMEPAGE_VAR_PIHOLE_URL}}"
-      widget:
-        type: pihole
-        url: http://pi.hole.or.ip
-        version: 6 # required if running v6 or higher, defaults to 5
-        key: yourpiholeapikey # optional
   - Traefik:
       icon: traefik.svg
       href: "{{HOMEPAGE_VAR_TRAEFIK_URL}}"
-      description: traefik dashboard
+      description: proxy
       siteMonitor: "{{HOMEPAGE_VAR_TRAEFIK_URL}}"
-      widget:
-        type: traefik
-        url: http://traefik.host.or.ip
 - Services:
   - Open WebUI:
       icon: mdi-chat-question-outline
       href: "{{HOMEPAGE_VAR_CHAT_URL}}"
-      description: Chat with LLMs
+      description: chatbots
       siteMonitor: "{{HOMEPAGE_VAR_CHAT_URL}}"
 

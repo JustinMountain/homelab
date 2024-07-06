@@ -28,12 +28,17 @@ layout:
     header: true
     style: row
     columns: 4
+    initiallyCollapsed: true
   Services:
     header: true
     style: row
     columns: 4
+  Socials:
+    header: true
+    style: row
+    columns: 4
+    initiallyCollapsed: true
 
 providers:
   openweathermap: openweathermapapikey
   weatherapi: weatherapiapikey
-
