@@ -1,6 +1,6 @@
 ---
 - name: Prune dangling images from the target hosts
-  hosts: "sandbox"
+  hosts: "docker_services"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:

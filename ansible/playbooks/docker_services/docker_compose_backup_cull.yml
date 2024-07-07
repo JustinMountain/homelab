@@ -1,27 +1,25 @@
 ---
-- name: Ensure the Sandbox stack of Docker containers are up to date on target
-  hosts: "sandbox"
-  # vars:
-  #   user_home: "/home/justin"
+- name: Cull every second volume backup for specified docker compose stacks
+  hosts: "docker_services"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
-  - role: docker/docker_compose_pull
+  - role: docker/docker_compose_backup_cull
     become: yes
     vars:
       stack_name: "traefik"
 
-  - role: docker/docker_compose_pull
+  - role: docker/docker_compose_backup_cull
     become: yes
     vars:
       stack_name: "uptime_kuma"
 
-  - role: docker/docker_compose_pull
+  - role: docker/docker_compose_backup_cull
     become: yes
     vars:
       stack_name: "open_webui"
 
-  - role: docker/docker_compose_pull
+  - role: docker/docker_compose_backup_cull
     become: yes
     vars:
       stack_name: "homepage"

@@ -1,0 +1,25 @@
+---
+- name: Ensure the Sandbox stack of Docker containers are up to date on target
+  hosts: "docker_services"
+  vars_files:
+  - ~/.ansible/vault/ansible_become_pass.yml
+  roles:
+  - role: docker/docker_compose_pull
+    become: yes
+    vars:
+      stack_name: "traefik"
+
+  - role: docker/docker_compose_pull
+    become: yes
+    vars:
+      stack_name: "uptime_kuma"
+
+  - role: docker/docker_compose_pull
+    become: yes
+    vars:
+      stack_name: "open_webui"
+
+  - role: docker/docker_compose_pull
+    become: yes
+    vars:
+      stack_name: "homepage"
