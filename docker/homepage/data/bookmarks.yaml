@@ -2,26 +2,44 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/latest/configs/bookmarks
 
-# - Developer:
-#     - Github:
-#         - icon: 
-#           abbr: GH
-#           href: https://github.com/
-
 - Socials:
     - YouTube:
         - icon: youtube.svg
           abbr: YT
           href: https://youtube.com/
+          target: _self 
     - Messenger:
         - icon: facebook-messenger.svg
           abbr: FB
           href: https://messenger.com/
+          target: _self 
     - LinkedIn:
         - icon: linkedin.svg
           abbr: LI
           href: https://linkedin.com/
+          target: _self 
     - Reddit:
         - icon: reddit.png
           abbr: RE
           href: https://reddit.com/
+          target: _self 
+    - Github:
+        - icon: github.svg
+          abbr: GH
+          href: https://github.com/
+          target: _self 
+    - news.ycombinator:
+        - icon: ycombinator.svg
+          abbr: YC
+          href: https://news.ycombinator.com/
+          target: _self 
+    - HackerNoon:
+        - icon: si-hackernoon-#FFF
+          abbr: HN
+          href: https://hackernoon.com/
+          target: _self 
+    - This Weel in Self-Hosted:
+        - icon: mdi-server-outline-#FFF
+          abbr: SH
+          href: https://selfh.st/
+          target: _self 

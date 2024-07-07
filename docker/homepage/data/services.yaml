@@ -14,6 +14,7 @@
       href: "{{HOMEPAGE_VAR_PROXMOX_URL}}"
       description: veloserver
       siteMonitor: "{{HOMEPAGE_VAR_PROXMOX_URL}}"
+      target: _self 
       widget:
         type: proxmox
         url: "{{HOMEPAGE_VAR_PROXMOX_URL}}"
@@ -24,6 +25,7 @@
       href: "{{HOMEPAGE_VAR_UPTIME_URL}}"
       description: service uptime
       siteMonitor: "{{HOMEPAGE_VAR_UPTIME_URL}}"
+      target: _self 
       widget:
         type: uptimekuma
         url: "{{HOMEPAGE_VAR_UPTIME_URL}}"
@@ -34,15 +36,17 @@
       href: "{{HOMEPAGE_VAR_PIHOLE_URL}}"
       description: dns
       siteMonitor: "{{HOMEPAGE_VAR_PIHOLE_URL}}"
+      target: _self 
   - Traefik:
       icon: traefik.svg
       href: "{{HOMEPAGE_VAR_TRAEFIK_URL}}"
       description: proxy
       siteMonitor: "{{HOMEPAGE_VAR_TRAEFIK_URL}}"
+      target: _self 
 - Services:
   - Open WebUI:
       icon: mdi-chat-question-outline
       href: "{{HOMEPAGE_VAR_CHAT_URL}}"
       description: chatbots
       siteMonitor: "{{HOMEPAGE_VAR_CHAT_URL}}"
-
+      target: _self 

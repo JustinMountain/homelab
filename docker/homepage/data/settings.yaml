@@ -37,7 +37,6 @@ layout:
     header: true
     style: row
     columns: 4
-    initiallyCollapsed: true
 
 providers:
   openweathermap: openweathermapapikey
