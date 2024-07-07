@@ -1,6 +1,6 @@
 ---
 - name: Init server from fresh Ubuntu install
-  hosts: "*"
+  hosts: "init"
   vars_files:
   - ~/.ansible/vault/ansible_ssh_pass.yml
   - ~/.ansible/vault/ansible_become_pass.yml
@@ -19,5 +19,5 @@
     - role: geerlingguy.docker
       become: yes
 
-    - role: init/set_static_ip
+    - role: init/network_config
       become: yes

@@ -4,24 +4,21 @@
     path: "/etc/netplan"
   register: network_config_exists
 
-- name: Find network_config file for remote
-  find:
-    paths: "/etc/netplan"
-    patterns: "0*"
-    recurse: no
-    file_type: file
+- name: Check if 50-cloud-init.yaml file exists
+  stat:
+    path: "/etc/netplan/50-cloud-init.yaml"
   when: network_config_exists
-  register: network_configs
+  register: network_config
 
 # - name: Debug backup volumes
 #   debug:
-#     msg: "{{ network_configs.files[0].path }}"
+#     msg: "{{ network_config }}"
     
 - name: Copy network configuration template to remote server
   template:
     src: network_config.j2
-    dest: "{{ network_configs.files[0].path }}"
-  # notify: Restart Server
+    dest: "/etc/netplan/50-cloud-init.yaml"
+  when: network_config
 
 - name: Apply Netplan configuration
   command: netplan apply
