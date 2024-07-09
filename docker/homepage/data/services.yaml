@@ -50,3 +50,9 @@
       description: chatbots
       siteMonitor: "{{HOMEPAGE_VAR_CHAT_URL}}"
       target: _self 
+  - Jellyfin:
+      icon: jellyfin.svg
+      href: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
+      description: movies and tv
+      siteMonitor: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
+      target: _self 

@@ -1,14 +1,9 @@
 ---
 - name: Tear down the Sandbox stack of Docker containers on target
-  hosts: "docker_services"
+  hosts: "sandbox"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
-  - role: docker/docker_compose_down
-    become: yes
-    vars:
-      stack_name: "open_webui"
-
   - role: docker/docker_compose_down
     become: yes
     vars:

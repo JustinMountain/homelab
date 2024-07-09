@@ -1,0 +1,59 @@
+---
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.igarashimountain.com`)"
+      - "traefik.http.routers.jellyfin.entrypoints=https"
+      - "traefik.http.routers.jellyfin.tls=true"
+      - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"  
+    networks:
+      - proxy
+    volumes:
+      - ./jellyfin:/config
+      - nfs-movies:/data/movies
+      - nfs-tv:/data/tvshows
+      - nfs-pt-movies:/data/pt-movies
+      - nfs-pt-tv:/data/pt-tvshows
+    ports:
+      - 8096:8096
+    #   - 8920:8920 #optional
+    #   - 7359:7359/udp
+    #   - 1900:1900/udp #optional
+    restart: unless-stopped
+
+volumes:
+  nfs-tv:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      device: ":/Multimedia/TV"
+  nfs-movies:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      device: ":/Multimedia/Movies"
+  nfs-pt-tv:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      device: ":/Multimedia/Portuguese/TV"
+  nfs-pt-movies:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      device: ":/Multimedia/Portuguese/Movies"
+
+networks:
+  proxy:
+    external: true

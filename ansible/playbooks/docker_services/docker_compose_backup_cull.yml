@@ -17,9 +17,14 @@
   # - role: docker/docker_compose_backup_cull
   #   become: yes
   #   vars:
+  #     stack_name: "homepage"
+
+  # - role: docker/docker_compose_backup_cull
+  #   become: yes
+  #   vars:
   #     stack_name: "open_webui"
 
   # - role: docker/docker_compose_backup_cull
   #   become: yes
   #   vars:
-  #     stack_name: "homepage"
+  #     stack_name: "jellyfin"

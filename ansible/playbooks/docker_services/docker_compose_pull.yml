@@ -17,9 +17,9 @@
   - role: docker/docker_compose_pull
     become: yes
     vars:
-      stack_name: "open_webui"
+      stack_name: "homepage"
 
   - role: docker/docker_compose_pull
     become: yes
     vars:
-      stack_name: "homepage"
+      stack_name: "jellyfin"

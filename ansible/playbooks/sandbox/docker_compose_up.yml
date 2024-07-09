@@ -1,14 +1,9 @@
 ---
 - name: Ensure the Sandbox stack of Docker containers up to date on target
-  hosts: "docker_services"
+  hosts: "sandbox"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
-  - role: docker/docker_compose_up
-    become: yes
-    vars:
-      stack_name: "open_webui"
-
   - role: docker/docker_compose_up
     become: yes
     vars:

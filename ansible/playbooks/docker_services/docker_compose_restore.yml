@@ -17,9 +17,14 @@
   # - role: docker/docker_compose_restore
   #   become: yes
   #   vars:
-  #     stack_name: "open_webui"
+  #     stack_name: "homepage"
 
   # - role: docker/docker_compose_restore
   #   become: yes
   #   vars:
-  #     stack_name: "homepage"
+  #     stack_name: "open_webui"
+
+  - role: docker/docker_compose_restore
+    become: yes
+    vars:
+      stack_name: "jellyfin"
