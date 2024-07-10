@@ -1,15 +1,15 @@
 ---
-- name: Ensure the Sandbox stack of Docker containers up to date on target
-  hosts: "docker_services"
+- name: Backup Docker volumes for all services
+  hosts: "services"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
-  - role: docker/docker_compose_up
+  - role: docker/compose_backup
     become: yes
     vars:
       stack_name: "open_webui"
 
-  - role: docker/docker_compose_up
+  - role: docker/compose_backup
     become: yes
     vars:
       stack_name: "jellyfin"

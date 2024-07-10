@@ -1,20 +1,20 @@
 ---
-- name: Tear down the Sandbox stack of Docker containers on target
-  hosts: "docker_services"
+- name: Tear down the essential service stacks of Docker containers
+  hosts: "essentials"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
-  - role: docker/docker_compose_down
+  - role: docker/compose_down
     become: yes
     vars:
       stack_name: "homepage"
 
-  - role: docker/docker_compose_down
+  - role: docker/compose_down
     become: yes
     vars:
       stack_name: "uptime_kuma"
 
-  - role: docker/docker_compose_down
+  - role: docker/compose_down
     become: yes
     vars:
       stack_name: "traefik"

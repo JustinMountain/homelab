@@ -1,0 +1,20 @@
+---
+- name: Backup Docker volumes for all services
+  hosts: "essentials"
+  vars_files:
+  - ~/.ansible/vault/ansible_become_pass.yml
+  roles:
+  - role: docker/compose_backup
+    become: yes
+    vars:
+      stack_name: "traefik"
+
+  - role: docker/compose_backup
+    become: yes
+    vars:
+      stack_name: "uptime_kuma"
+
+  - role: docker/compose_backup
+    become: yes
+    vars:
+      stack_name: "homepage"

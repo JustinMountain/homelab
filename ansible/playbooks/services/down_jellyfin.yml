@@ -1,0 +1,10 @@
+---
+- name: Tear down the Jellyfin stack of Docker containers
+  hosts: "services"
+  vars_files:
+  - ~/.ansible/vault/ansible_become_pass.yml
+  roles:
+  - role: docker/compose_down
+    become: yes
+    vars:
+      stack_name: "jellyfin"

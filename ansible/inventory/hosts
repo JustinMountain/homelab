@@ -4,5 +4,12 @@
 [init]
 192.168.1.153
 
-[docker_services]
+[docker:children]
+essentials
+services
+
+[essentials]
+192.168.1.230
+
+[services]
 192.168.1.230

@@ -1,0 +1,20 @@
+---
+- name: Cull every second volume backup for specified Docker compose stacks
+  hosts: "essentials"
+  vars_files:
+  - ~/.ansible/vault/ansible_become_pass.yml
+  roles:
+  # - role: docker/compose_cull_backups
+  #   become: yes
+  #   vars:
+  #     stack_name: "traefik"
+
+  # - role: docker/compose_cull_backups
+  #   become: yes
+  #   vars:
+  #     stack_name: "uptime_kuma"
+
+  # - role: docker/compose_cull_backups
+  #   become: yes
+  #   vars:
+  #     stack_name: "homepage"

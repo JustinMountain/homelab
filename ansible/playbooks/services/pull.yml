@@ -1,15 +1,15 @@
 ---
-- name: Tear down the Sandbox stack of Docker containers on target
-  hosts: "docker_services"
+- name: Pull the latest Docker images for all services
+  hosts: "services"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
-  - role: docker/docker_compose_down
+  - role: docker/compose_pull
     become: yes
     vars:
       stack_name: "open_webui"
 
-  - role: docker/docker_compose_down
+  - role: docker/compose_pull
     become: yes
     vars:
       stack_name: "jellyfin"

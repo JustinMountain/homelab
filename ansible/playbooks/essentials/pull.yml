@@ -1,20 +1,20 @@
 ---
-- name: Ensure the Sandbox stack of Docker containers up to date on target
-  hosts: "docker_services"
+- name: Pull the latest Docker images for all services
+  hosts: "essentials"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
-  - role: docker/docker_compose_up
+  - role: docker/compose_pull
     become: yes
     vars:
       stack_name: "traefik"
 
-  - role: docker/docker_compose_up
+  - role: docker/compose_pull
     become: yes
     vars:
       stack_name: "uptime_kuma"
 
-  - role: docker/docker_compose_up
+  - role: docker/compose_pull
     become: yes
     vars:
       stack_name: "homepage"
