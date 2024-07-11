@@ -1,0 +1,46 @@
+---
+- name: Check if Dracula theme repository has already been cloned
+  stat:
+    path: "{{ user_home }}/{{ stack_name }}/qbittorrent/qBittorrent/theme"
+  register: theme_dir
+
+- block:
+  - name: Tear down {{ stack_name }} Docker Compose stack
+    community.docker.docker_compose_v2:
+      project_src: "{{ user_home }}/{{ stack_name }}"
+      state: absent
+
+  - name: Clone qBittorrent Dracula theme repository
+    git:
+      repo: 'https://github.com/dracula/qbittorrent.git'
+      dest: '{{ user_home }}/{{ stack_name }}/qbittorrent/qBittorrent/theme'
+      version: master 
+
+  - name: Set permissions on qBittorrent theme directory
+    file:
+      path: '{{ user_home }}/{{ stack_name }}/qbittorrent/qBittorrent/theme'
+      mode: '0777'
+      recurse: yes
+
+  - name: Check if Dracula theme has been enabled
+    lineinfile:
+      path: "{{ user_home }}/{{ stack_name }}/qbittorrent/qBittorrent/qBittorrent.conf"
+      regexp: '^WebUI\\AlternativeUIEnabled='
+      line: 'WebUI\AlternativeUIEnabled=true'
+      state: present
+    register: alt_ui_enabled
+
+  - name: Check if Dracula theme is properly referenced
+    lineinfile:
+      path: "{{ user_home }}/{{ stack_name }}/qbittorrent/qBittorrent/qBittorrent.conf"
+      regexp: '^WebUI\\RootFolder='
+      line: 'WebUI\RootFolder=/config/qBittorrent/theme/webui'
+      state: present
+    register: alt_ui_ref
+
+  - name: Deploy {{ stack_name }} Docker Compose stack
+    community.docker.docker_compose_v2:
+      project_src: "{{ user_home }}/{{ stack_name }}"
+      state: present
+  when:
+  - not theme_dir.stat.exists

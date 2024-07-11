@@ -4,7 +4,12 @@
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
-  - role: docker/docker_compose_up
+  - role: docker/compose_up
     become: yes
     vars:
-      stack_name: "jellyfin"
+      stack_name: "servarr"
+
+  - role: docker/container_qbittorrent_dark_mode
+    become: yes
+    vars:
+      stack_name: "servarr"

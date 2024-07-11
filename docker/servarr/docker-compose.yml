@@ -1,0 +1,66 @@
+---
+services:
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - VPN_SERVICE_PROVIDER=nordvpn
+      - OPENVPN_USER=${OPENVPN_USER}
+      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
+      - SERVER_COUNTRIES=Brazil
+      - TZ=${TZ}
+    ports:
+      - 8888:8888/tcp # HTTP proxy
+      - 8080:8080 # qBittorrent
+      # - 8112:8112 # Deluge
+      # - 9696:9696 # Prowlarr
+      # - 8989:8989 # Sonarr
+      # - 7878:7878 # Radarr
+      # - 6767:6767 # Bazarr
+    restart: unless-stopped
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+    volumes:
+      - ./qbittorrent:/config
+      - ./downloads:/downloads
+    # ports:
+    #   - 8080:8080
+    #   - 6881:6881
+    #   - 6881:6881/udp
+    restart: unless-stopped
+
+
+
+  # deluge:
+  #   image: lscr.io/linuxserver/deluge:latest
+  #   container_name: deluge
+  #   depends_on:
+  #     - gluetun
+  #   network_mode: "service:gluetun"
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=${TZ}
+  #     - DELUGE_LOGLEVEL=error #optional
+  #   volumes:
+  #     - ./deluge:/config
+  #     - ./downloads:/downloads
+  #     # Dark theme from https://github.com/joelacus/deluge-web-dark-theme on 2024/07/10 
+  #     # - ./servarr/servarr/icons:/usr/lib/python3.12/site-packages/deluge/ui/web/icons
+  #     # - ./servarr/servarr/images:/usr/lib/python3.12/site-packages/deluge/ui/web/images
+  #     # - ./servarr/servarr/themes:/usr/lib/python3.12/site-packages/deluge/ui/web/themes
+  #   restart: unless-stopped
+
+
+# /usr/lib/python3.12/site-packages/deluge/ui/web
