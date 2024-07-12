@@ -14,11 +14,11 @@ services:
     ports:
       - 8888:8888/tcp # HTTP proxy
       - 8080:8080 # qBittorrent
-      # - 8112:8112 # Deluge
-      # - 9696:9696 # Prowlarr
-      # - 8989:8989 # Sonarr
-      # - 7878:7878 # Radarr
-      # - 6767:6767 # Bazarr
+      - 8989:8989 # Sonarr
+      - 7878:7878 # Radarr
+      - 9696:9696 # Prowlarr
+      - 8191:8191 # FlareSolverr
+      - 6767:6767 # Bazarr
     restart: unless-stopped
 
   qbittorrent:
@@ -34,33 +34,83 @@ services:
     volumes:
       - ./qbittorrent:/config
       - ./downloads:/downloads
-    # ports:
-    #   - 8080:8080
-    #   - 6881:6881
-    #   - 6881:6881/udp
     restart: unless-stopped
 
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    volumes:
+      - ./sonarr:/config
+      - ./downloads:/downloads
+      - nfs-tv:/tv
+    restart: unless-stopped
 
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    volumes:
+      - ./radarr:/config
+      - ./downloads:/downloads
+      - nfs-movies:/movies
+    restart: unless-stopped
 
-  # deluge:
-  #   image: lscr.io/linuxserver/deluge:latest
-  #   container_name: deluge
-  #   depends_on:
-  #     - gluetun
-  #   network_mode: "service:gluetun"
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=${TZ}
-  #     - DELUGE_LOGLEVEL=error #optional
-  #   volumes:
-  #     - ./deluge:/config
-  #     - ./downloads:/downloads
-  #     # Dark theme from https://github.com/joelacus/deluge-web-dark-theme on 2024/07/10 
-  #     # - ./servarr/servarr/icons:/usr/lib/python3.12/site-packages/deluge/ui/web/icons
-  #     # - ./servarr/servarr/images:/usr/lib/python3.12/site-packages/deluge/ui/web/images
-  #     # - ./servarr/servarr/themes:/usr/lib/python3.12/site-packages/deluge/ui/web/themes
-  #   restart: unless-stopped
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    volumes:
+      - ./prowlarr:/config
+    restart: unless-stopped
 
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    network_mode: "service:gluetun"
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_HTML=${LOG_HTML:-false}
+      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
+      - TZ=${TZ}
+    restart: unless-stopped
 
-# /usr/lib/python3.12/site-packages/deluge/ui/web
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    volumes:
+      - ./bazarr:/config
+      - nfs-movies:/movies
+      - nfs-tv:/tv
+    restart: unless-stopped
+
+volumes:
+  nfs-tv:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      device: ":/Multimedia/TV"
+  nfs-movies:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      device: ":/Multimedia/Movies"

@@ -1,0 +1,37 @@
+---
+- name: Check if restartStack.sh file exists
+  stat:
+    path: "{{ user_home }}/{{ stack_name }}/{{ stack_name }}/restartStack.sh"
+  register: restart_script
+
+- name: Ensure restartStack.sh has 755 permissions
+  file:
+    path: "{{ user_home }}/{{ stack_name }}/{{ stack_name }}/restartStack.sh"
+    mode: '0755'
+  when: restart_script.stat.exists
+
+- name: Define logs file path
+  set_fact:
+    logs_file_path: "{{ user_home }}/{{ stack_name }}/{{ stack_name }}/logs.txt"
+
+- name: Ensure logs.txt file exists
+  file:
+    path: "{{ logs_file_path }}"
+    state: touch
+    mode: '0644'
+
+- name: Add cron job to restart servarr stack every 3 hours
+  cron:
+    name: "Restart servarr stack every 3 hours"
+    minute: "0"
+    hour: "*/4"
+    job: "{{ restart_script.stat.path }} >> {{ logs_file_path }} 2>&1"
+    user: "{{ ansible_user }}"
+  when: restart_script.stat.exists
+  register: cron_job_result
+
+- name: Restart cron service
+  systemd:
+    name: cron
+    state: restarted
+  when: cron_job_result.changed
