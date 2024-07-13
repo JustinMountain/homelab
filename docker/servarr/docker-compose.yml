@@ -16,6 +16,8 @@ services:
       - 8080:8080 # qBittorrent
       - 8989:8989 # Sonarr
       - 7878:7878 # Radarr
+      - 8686:8686 # Lidarr
+      - 8787:8787 # Readarr
       - 9696:9696 # Prowlarr
       - 8191:8191 # FlareSolverr
       - 6767:6767 # Bazarr
@@ -62,6 +64,34 @@ services:
       - ./radarr:/config
       - ./downloads:/downloads
       - nfs-movies:/movies
+    restart: unless-stopped
+
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    volumes:
+      - ./lidarr:/config
+      - ./downloads:/downloads
+      - nfs-music:/music #optional
+    restart: unless-stopped
+
+  readarr:
+    image: lscr.io/linuxserver/readarr:develop
+    container_name: readarr
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    volumes:
+      - ./readarr:/config
+      - ./downloads:/downloads
+      - nfs-books:/books #optional
     restart: unless-stopped
 
   prowlarr:
@@ -114,3 +144,15 @@ volumes:
       type: nfs
       o: addr=${NFS_SHARE_IP},rw,nfsvers=4
       device: ":/Multimedia/Movies"
+  nfs-music:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      device: ":/Multimedia/Music"
+  nfs-books:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      device: ":/Multimedia/Books"
