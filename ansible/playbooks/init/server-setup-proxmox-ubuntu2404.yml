@@ -1,23 +1,14 @@
 ---
 - name: Init server from fresh Ubuntu install
   hosts: "init"
+  become: yes
   vars_files:
   - ~/.ansible/vault/ansible_ssh_pass.yml
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
-    - role: init/ssh_key_copy
-    
-    - role: init/disable_password_login
-      become: yes
-
-    - role: init/apt_update_upgrade
-      become: yes
-
-    - role: init/qemu_guest_agent
-      become: yes
-
-    - role: geerlingguy.docker
-      become: yes
-
-    - role: init/network_config
-      become: yes
+  - role: init/ssh_key_copy
+  - role: init/disable_password_login
+  - role: init/apt_update_upgrade
+  - role: init/qemu_guest_agent
+  - role: geerlingguy.docker
+  - role: init/network_config
