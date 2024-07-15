@@ -35,7 +35,7 @@ services:
       - TORRENTING_PORT=6881
     volumes:
       - ./qbittorrent:/config
-      - ./downloads:/downloads
+      - nfs-downloads:/downloads
     restart: unless-stopped
 
   sonarr:
@@ -48,7 +48,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ./sonarr:/config
-      - ./downloads:/downloads
+      - nfs-downloads:/downloads
       - nfs-tv:/tv
     restart: unless-stopped
 
@@ -62,8 +62,8 @@ services:
       - TZ=${TZ}
     volumes:
       - ./radarr:/config
-      - ./downloads:/downloads
-      - nfs-movies:/movies
+      - nfs-downloads:/downloads
+      # - nfs-movies:/movies
     restart: unless-stopped
 
   lidarr:
@@ -76,8 +76,8 @@ services:
       - TZ=${TZ}
     volumes:
       - ./lidarr:/config
-      - ./downloads:/downloads
-      - nfs-music:/music #optional
+      - nfs-downloads:/downloads
+      - nfs-music:/music 
     restart: unless-stopped
 
   readarr:
@@ -90,8 +90,8 @@ services:
       - TZ=${TZ}
     volumes:
       - ./readarr:/config
-      - ./downloads:/downloads
-      - nfs-books:/books #optional
+      - nfs-downloads:/downloads
+      - nfs-books:/books 
     restart: unless-stopped
 
   prowlarr:
@@ -127,32 +127,38 @@ services:
       - TZ=${TZ}
     volumes:
       - ./bazarr:/config
-      - nfs-movies:/movies
+      # - nfs-movies:/movies
       - nfs-tv:/tv
     restart: unless-stopped
 
 volumes:
+  nfs-downloads:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4,soft
+      device: ":/Multimedia/Downloads"
   nfs-tv:
     driver: local
     driver_opts:
       type: nfs
-      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4,soft
       device: ":/Multimedia/TV"
   nfs-movies:
     driver: local
     driver_opts:
       type: nfs
-      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4,soft
       device: ":/Multimedia/Movies"
   nfs-music:
     driver: local
     driver_opts:
       type: nfs
-      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4,soft
       device: ":/Multimedia/Music"
   nfs-books:
     driver: local
     driver_opts:
       type: nfs
-      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4,soft
       device: ":/Multimedia/Books"

@@ -2,14 +2,18 @@
 192.168.1.229
 
 [init]
-192.168.1.153
+192.168.1.214
 
 [docker:children]
 essentials
 services
+servarr
 
 [essentials]
 192.168.1.230
 
 [services]
 192.168.1.230
+
+[servarr]
+192.168.1.232

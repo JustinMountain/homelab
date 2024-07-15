@@ -1,0 +1,10 @@
+---
+- name: Tear down the Sandbox stack of Docker containers on target
+  hosts: "servarr"
+  become: yes
+  vars:
+    stack_name: "servarr"
+  vars_files:
+  - ~/.ansible/vault/ansible_become_pass.yml
+  roles:
+  - role: docker/compose_down

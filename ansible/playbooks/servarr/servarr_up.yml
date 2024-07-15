@@ -1,0 +1,12 @@
+---
+- name: Ensure the Sandbox stack of Docker containers up to date on target
+  hosts: "servarr"
+  become: yes
+  vars:
+    stack_name: "servarr"
+  vars_files:
+  - ~/.ansible/vault/ansible_become_pass.yml
+  roles:
+  - role: docker/compose_up
+  - role: docker/container_qbittorrent_dark_mode
+  - role: docker/cronjob_restart_stack
