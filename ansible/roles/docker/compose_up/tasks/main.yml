@@ -1,5 +1,5 @@
 ---
-- name: Create a directory for {{ stack_name }} docker-compose.yml
+- name: Create a directory for {{ stack_name }} compose.yml
   ansible.builtin.file:
     path: "{{ user_home }}/{{ stack_name }}" 
     state: directory
@@ -18,10 +18,10 @@
     mode: 0644
   when: env_file.stat.exists
 
-- name: Copy {{ stack_name }} docker-compose.yml to remote host
+- name: Copy {{ stack_name }} compose.yml to remote host
   ansible.builtin.copy:
-    src: "~/homelab/docker/{{ stack_name }}/docker-compose.yml"
-    dest: "{{ user_home }}/{{ stack_name }}/docker-compose.yml"
+    src: "~/homelab/docker/{{ stack_name }}/compose.yml"
+    dest: "{{ user_home }}/{{ stack_name }}/compose.yml"
     mode: 0755
 
 - name: Check if {{ stack_name }}/data exists on host
