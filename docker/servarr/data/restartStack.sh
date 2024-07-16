@@ -4,7 +4,7 @@ set -e  # Exit immediately if a command exits with a non-zero status
 
 DOCKER_COMPOSE_FILE="$HOME/servarr/docker-compose.yml"
 DOCKER_DOWN="docker-compose down"
-DOCKER_UP="docker-compose up -d"  # Added -d for detached mode
+DOCKER_UP="docker-compose up -d"
 
 # Check if docker-compose file exists
 if [ ! -f "$DOCKER_COMPOSE_FILE" ]; then

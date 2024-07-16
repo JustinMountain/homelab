@@ -1,2 +1,2 @@
-# Restart servarr stack every 3 hours, starting at 1
-0 1/3 * * * ~/servarr/restartContainers.sh >> ~/servarr/logs.txt 2>&1
+# Restart servarr stack every 4 hours
+0 */4 * * * ~/servarr/restartContainers.sh >> ~/servarr/logs.txt 2>&1

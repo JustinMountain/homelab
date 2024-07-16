@@ -15,22 +15,39 @@
       description: veloserver
       siteMonitor: "{{HOMEPAGE_VAR_PROXMOX_URL}}"
       target: _self 
-      widget:
-        type: proxmox
-        url: "{{HOMEPAGE_VAR_PROXMOX_URL}}"
-        username: "{{HOMEPAGE_VAR_PROXMOX_API_TOKEN_ID}}"
-        password: "{{HOMEPAGE_VAR_PROXMOX_API_TOKEN_SECRET}}"
+      # widget:
+      #   type: proxmox
+      #   url: "{{HOMEPAGE_VAR_PROXMOX_URL}}"
+      #   username: "{{HOMEPAGE_VAR_PROXMOX_API_TOKEN_ID}}"
+      #   password: "{{HOMEPAGE_VAR_PROXMOX_API_TOKEN_SECRET}}"
   - Uptime Kuma:
       icon: uptime-kuma.svg
       href: "{{HOMEPAGE_VAR_UPTIME_URL}}"
       description: service uptime
       siteMonitor: "{{HOMEPAGE_VAR_UPTIME_URL}}"
       target: _self 
-      widget:
-        type: uptimekuma
-        url: "{{HOMEPAGE_VAR_UPTIME_URL}}"
-        slug: "{{HOMEPAGE_VAR_UPTIME_SLUG}}"
+      # widget:
+      #   type: uptimekuma
+      #   url: "{{HOMEPAGE_VAR_UPTIME_URL}}"
+      #   slug: "{{HOMEPAGE_VAR_UPTIME_SLUG}}"
+  - BrontosaurNAS:
+      icon: mdi-database
+      href: "{{HOMEPAGE_VAR_NAS_URL}}"
+      description: data storage
+      siteMonitor: "{{HOMEPAGE_VAR_NAS_URL}}"
+      target: _self 
+      # widget:
+      #   type: qnap
+      #   url: "{{HOMEPAGE_VAR_NAS_URL}}"
+      #   username: "{{HOMEPAGE_VAR_NAS_USER}}"
+      #   password: "{{HOMEPAGE_VAR_NAS_PASSWORD}}"
 - Networking:
+  - OpenWRT:
+      icon: openwrt.png
+      href: "{{HOMEPAGE_VAR_OPENWRT_URL}}"
+      description: router/firewall
+      siteMonitor: "{{HOMEPAGE_VAR_OPENWRT_URL}}"
+      target: _self 
   - PiHole:
       icon: pi-hole.svg
       href: "{{HOMEPAGE_VAR_PIHOLE_URL}}"
@@ -53,6 +70,61 @@
   - Jellyfin:
       icon: jellyfin.svg
       href: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
-      description: movies and tv
+      description: local streaming
       siteMonitor: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
+      target: _self 
+  - Nextcloud:
+      icon: nextcloud-blue.svg
+      href: "{{HOMEPAGE_VAR_NEXTCLOUD_URL}}"
+      description: photo backup
+      siteMonitor: "{{HOMEPAGE_VAR_NEXTCLOUD_URL}}"
+      target: _self 
+- Servarr:
+  - Sonarr:
+      icon: sonarr.svg
+      href: "{{HOMEPAGE_VAR_SONARR_URL}}"
+      description: tv
+      siteMonitor: "{{HOMEPAGE_VAR_SONARR_URL}}"
+      target: _self 
+  - Radarr:
+      icon: radarr.svg
+      href: "{{HOMEPAGE_VAR_RADARR_URL}}"
+      description: movies
+      siteMonitor: "{{HOMEPAGE_VAR_RADARR_URL}}"
+      target: _self 
+  - Lidarr:
+      icon: lidarr.svg
+      href: "{{HOMEPAGE_VAR_LIDARR_URL}}"
+      description: music
+      siteMonitor: "{{HOMEPAGE_VAR_LIDARR_URL}}"
+      target: _self 
+  - Readarr:
+      icon: readarr.svg
+      href: "{{HOMEPAGE_VAR_READARR_URL}}"
+      description: books
+      siteMonitor: "{{HOMEPAGE_VAR_READARR_URL}}"
+      target: _self 
+  - qBittorrent:
+      icon: qbittorrent.svg
+      href: "{{HOMEPAGE_VAR_QBITTORRENT_URL}}"
+      description: torrents
+      siteMonitor: "{{HOMEPAGE_VAR_QBITTORRENT_URL}}"
+      target: _self 
+  - Bazarr:
+      icon: bazarr.svg
+      href: "{{HOMEPAGE_VAR_BAZARR_URL}}"
+      description: subtitles
+      siteMonitor: "{{HOMEPAGE_VAR_BAZARR_URL}}"
+      target: _self 
+  - Prowlarr:
+      icon: prowlarr.svg
+      href: "{{HOMEPAGE_VAR_PROWLARR_URL}}"
+      description: indexer
+      siteMonitor: "{{HOMEPAGE_VAR_PROWLARR_URL}}"
+      target: _self 
+  - FlareSolverr:
+      icon: flaresolverr.svg
+      href: "{{HOMEPAGE_VAR_FLARESOLVERR_URL}}"
+      description: cloudflare bypass
+      siteMonitor: "{{HOMEPAGE_VAR_FLARESOLVERR_URL}}"
       target: _self 

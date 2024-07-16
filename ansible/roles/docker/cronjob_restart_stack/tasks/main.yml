@@ -22,7 +22,7 @@
 
 - name: Add cron job to restart servarr stack every 3 hours
   cron:
-    name: "Restart servarr stack every 3 hours"
+    name: "Restart servarr stack every 4 hours"
     minute: "0"
     hour: "*/4"
     job: "{{ restart_script.stat.path }} >> {{ logs_file_path }} 2>&1"

@@ -1,15 +1,15 @@
 http:
  #region routers 
   routers:
-    proxmox:
+    openwrt:
       entryPoints:
         - "https"
-      rule: "Host(`proxmox.igarashimountain.com`)"
+      rule: "Host(`openwrt.igarashimountain.com`)"
       middlewares:
         - default-headers
         - https-redirectscheme
       tls: {}
-      service: proxmox
+      service: openwrt
     pihole:
       entryPoints:
         - "https"
@@ -21,19 +21,173 @@ http:
         - https-redirectscheme
       tls: {}
       service: pihole
+    proxmox:
+      entryPoints:
+        - "https"
+      rule: "Host(`proxmox.igarashimountain.com`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: proxmox
+    nas:
+      entryPoints:
+        - "https"
+      rule: "Host(`nas.igarashimountain.com`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: nas
+    nextcloud:
+      entryPoints:
+        - "https"
+      rule: "Host(`nextcloud.igarashimountain.com`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: nextcloud
+    torrent:
+      entryPoints:
+        - "https"
+      rule: "Host(`torrent.igarashimountain.com`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: torrent
+    sonarr:
+      entryPoints:
+        - "https"
+      rule: "Host(`sonarr.igarashimountain.com`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: sonarr
+    radarr:
+      entryPoints:
+        - "https"
+      rule: "Host(`radarr.igarashimountain.com`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: radarr
+    Lidarr:
+      entryPoints:
+        - "https"
+      rule: "Host(`Lidarr.igarashimountain.com`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: Lidarr
+    readarr:
+      entryPoints:
+        - "https"
+      rule: "Host(`readarr.igarashimountain.com`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: readarr
+    prowlarr:
+      entryPoints:
+        - "https"
+      rule: "Host(`prowlarr.igarashimountain.com`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: prowlarr
+    flaresolverr:
+      entryPoints:
+        - "https"
+      rule: "Host(`flaresolverr.igarashimountain.com`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: flaresolverr
+    bazarr:
+      entryPoints:
+        - "https"
+      rule: "Host(`bazarr.igarashimountain.com`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: bazarr
 
 #endregion
 #region services
   services:
-    proxmox:
+    openwrt:
       loadBalancer:
         servers:
-          - url: "https://192.168.1.200:8006"
+          - url: "https://192.168.1.1"
         passHostHeader: true
     pihole:
       loadBalancer:
         servers:
           - url: "http://192.168.1.100:80"
+        passHostHeader: true
+    proxmox:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.1.200:8006"
+        passHostHeader: true
+    nas:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.101:8080"
+        passHostHeader: true
+    nextcloud:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.1.210"
+        passHostHeader: true
+    torrent:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.232:8080"
+        passHostHeader: true
+    sonarr:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.232:8989"
+        passHostHeader: true
+    radarr:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.232:7878"
+        passHostHeader: true
+    Lidarr:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.232:8686"
+        passHostHeader: true
+    readarr:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.232:8787"
+        passHostHeader: true
+    prowlarr:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.232:9696"
+        passHostHeader: true
+    flaresolverr:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.232:8191"
+        passHostHeader: true
+    bazarr:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.232:6767"
         passHostHeader: true
 #endregion
   middlewares:

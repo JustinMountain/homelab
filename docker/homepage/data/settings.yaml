@@ -33,6 +33,10 @@ layout:
     header: true
     style: row
     columns: 4
+  Servarr:
+    header: true
+    style: row
+    columns: 4
   Socials:
     header: true
     style: row
