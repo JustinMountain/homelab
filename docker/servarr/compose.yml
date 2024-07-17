@@ -63,7 +63,7 @@ services:
     volumes:
       - ./radarr:/config
       - nfs-downloads:/downloads
-      # - nfs-movies:/movies
+      - nfs-movies:/movies
     restart: unless-stopped
 
   lidarr:
@@ -127,7 +127,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ./bazarr:/config
-      # - nfs-movies:/movies
+      - nfs-movies:/movies
       - nfs-tv:/tv
     restart: unless-stopped
 
