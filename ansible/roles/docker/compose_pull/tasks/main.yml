@@ -1,8 +1,8 @@
 ---
-- name: Ensure up to date {{ stack_name }} docker-compose.yml is on remote host
+- name: Ensure up to date {{ stack_name }} compose.yml is on remote host
   ansible.builtin.copy:
-    src: "~/homelab/docker/{{ stack_name }}/docker-compose.yml"
-    dest: "{{ user_home }}/{{ stack_name }}/docker-compose.yml"
+    src: "~/homelab/docker/{{ stack_name }}/compose.yml"
+    dest: "{{ user_home }}/{{ stack_name }}/compose.yml"
     mode: 0755
 
 - name: Deploy {{ stack_name }} Docker Compose stack

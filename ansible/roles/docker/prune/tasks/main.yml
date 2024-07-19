@@ -3,6 +3,6 @@
   command: docker image prune -a -f
   register: prune_result
 
-- name: Display the result of the prune command
-  debug:
-    var: prune_result
+# - name: Display the result of the prune command
+#   debug:
+#     var: prune_result

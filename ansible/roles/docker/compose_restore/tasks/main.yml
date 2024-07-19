@@ -4,18 +4,18 @@
     project_src: "{{ user_home }}/{{ stack_name }}"
     state: absent
 
-- name: Read the {{ stack_name }} docker-compose.yml file
+- name: Read the {{ stack_name }} compose.yml file
   slurp:
-    src: "{{ user_home }}/{{ stack_name }}/docker-compose.yml"
-  register: docker_compose_file
+    src: "{{ user_home }}/{{ stack_name }}/compose.yml"
+  register: compose_file
 
-- name: Parse the {{ stack_name }} docker-compose.yml file
+- name: Parse the {{ stack_name }} compose.yml file
   set_fact:
-    docker_compose_content: "{{ docker_compose_file.content | b64decode | from_yaml }}"
+    compose_content: "{{ compose_file.content | b64decode | from_yaml }}"
 
 - name: Extract {{ stack_name }} service names
   set_fact:
-    service_names: "{{ docker_compose_content.services.keys() | list }}"
+    service_names: "{{ compose_content.services.keys() | list }}"
 
 - name: Restore most recent Docker Volume backups for {{ stack_name }}
   block:
