@@ -12,3 +12,7 @@
   - role: docker/compose_backup
     vars:
       stack_name: "jellyfin"
+
+  - role: docker/compose_backup
+    vars:
+      stack_name: "actual"

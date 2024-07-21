@@ -13,3 +13,8 @@
     become: yes
     vars:
       stack_name: "jellyfin"
+
+  - role: docker/compose_up
+    become: yes
+    vars:
+      stack_name: "actual"

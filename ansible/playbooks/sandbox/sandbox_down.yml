@@ -3,7 +3,7 @@
   hosts: "sandbox"
   become: yes
   vars:
-    stack_name: "servarr"
+    stack_name: "firefly"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
