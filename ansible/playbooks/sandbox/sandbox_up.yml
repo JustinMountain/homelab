@@ -3,8 +3,9 @@
   hosts: "sandbox"
   become: yes
   vars:
-    stack_name: "firefly"
+    stack_name: "obsidian"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
   - role: docker/compose_up
+az
