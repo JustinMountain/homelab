@@ -23,13 +23,13 @@
       abbr: RE
       href: https://reddit.com/
       target: _self 
-  - Github:
-    - icon: github.svg
+  - GitHub:
+    - icon: si-github
       abbr: GH
       href: https://github.com/
       target: _self 
   - This Week in Self-Hosted:
-    - icon: mdi-server-outline-#FFF
+    - icon: mdi-server-outline
       abbr: SH
       href: https://selfh.st/
       target: _self 

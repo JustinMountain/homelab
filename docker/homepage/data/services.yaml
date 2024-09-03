@@ -62,7 +62,7 @@
       target: _self 
 - Services:
   - Open WebUI:
-      icon: mdi-chat-question-outline
+      icon: open-webui-light.png
       href: "{{HOMEPAGE_VAR_CHAT_URL}}"
       description: chatbots
       siteMonitor: "{{HOMEPAGE_VAR_CHAT_URL}}"
@@ -84,6 +84,12 @@
       href: "{{HOMEPAGE_VAR_NEXTCLOUD_URL}}"
       description: photo backup
       siteMonitor: "{{HOMEPAGE_VAR_NEXTCLOUD_URL}}"
+      target: _self 
+  - Change Detection:
+      icon: changedetection-io.png
+      href: "{{HOMEPAGE_VAR_CHANGE_DETECTION_URL}}"
+      description: monitor changes
+      siteMonitor: "{{HOMEPAGE_VAR_CHANGE_DETECTION_URL}}"
       target: _self 
 - Servarr:
   - Sonarr:

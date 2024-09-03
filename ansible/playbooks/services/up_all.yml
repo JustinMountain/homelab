@@ -10,11 +10,13 @@
       stack_name: "open_webui"
 
   - role: docker/compose_up
-    become: yes
     vars:
       stack_name: "jellyfin"
 
   - role: docker/compose_up
-    become: yes
     vars:
       stack_name: "actual"
+
+  - role: docker/compose_up
+    vars:
+      stack_name: "change_detection"

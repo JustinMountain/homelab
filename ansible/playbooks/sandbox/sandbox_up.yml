@@ -3,9 +3,8 @@
   hosts: "sandbox"
   become: yes
   vars:
-    stack_name: "obsidian"
+    stack_name: "change_detection"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
   - role: docker/compose_up
-az
