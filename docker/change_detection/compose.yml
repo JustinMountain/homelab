@@ -6,8 +6,8 @@ services:
     hostname: changedetection
     volumes:
       - ./data/datastore:/datastore
-    ports:
-      - 5000:5000
+    # ports:
+      # - 5000:5000
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.changes.rule=Host(`changes.igarashimountain.com`)"
