@@ -3,7 +3,7 @@
   hosts: "sandbox"
   become: yes
   vars:
-    stack_name: "change_detection"
+    stack_name: "mealie"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:

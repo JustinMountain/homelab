@@ -91,6 +91,12 @@
       description: monitor changes
       siteMonitor: "{{HOMEPAGE_VAR_CHANGE_DETECTION_URL}}"
       target: _self 
+  - Mealie:
+      icon: mealie.png
+      href: "{{HOMEPAGE_VAR_MEALIE_URL}}"
+      description: recipes
+      siteMonitor: "{{HOMEPAGE_VAR_MEALIE_URL}}"
+      target: _self 
 - Servarr:
   - Sonarr:
       icon: sonarr.svg

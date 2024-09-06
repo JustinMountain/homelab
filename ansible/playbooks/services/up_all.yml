@@ -20,3 +20,7 @@
   - role: docker/compose_up
     vars:
       stack_name: "change_detection"
+
+  - role: docker/compose_up
+    vars:
+      stack_name: "mealie"
