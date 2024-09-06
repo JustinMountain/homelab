@@ -1,5 +1,5 @@
 ---
-- name: Tear down the Jellyfin stack of Docker containers
+- name: Tear down all of the service stacks of Docker containers
   hosts: "services"
   become: yes
   vars_files:

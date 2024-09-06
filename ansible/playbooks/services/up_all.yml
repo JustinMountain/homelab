@@ -1,5 +1,5 @@
 ---
-- name: Deploy the Jellyfin stack of Docker containers
+- name: Deploy all of the service stacks of Docker containers
   hosts: "services"
   become: yes
   vars_files:

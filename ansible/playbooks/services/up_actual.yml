@@ -1,5 +1,5 @@
 ---
-- name: Deploy the Firefly III stack of Docker containers
+- name: Deploy the Actual stack of Docker containers
   hosts: "services"
   become: yes
   vars_files:

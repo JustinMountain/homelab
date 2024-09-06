@@ -1,5 +1,5 @@
 ---
-- name: Tear down the Firefly III stack of Docker containers
+- name: Tear down the Actual stack of Docker containers
   hosts: "services"
   become: yes
   vars_files:
