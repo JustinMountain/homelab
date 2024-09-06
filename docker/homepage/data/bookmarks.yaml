@@ -4,17 +4,17 @@
 
 - Socials:
   - YouTube:
-    - icon: youtube.svg
+    - icon: youtube.png
       abbr: YT
       href: https://youtube.com/
       target: _self 
   - Messenger:
-    - icon: facebook-messenger.svg
+    - icon: facebook-messenger.png
       abbr: FB
       href: https://messenger.com/
       target: _self 
   - LinkedIn:
-    - icon: linkedin.svg
+    - icon: linkedin.png
       abbr: LI
       href: https://linkedin.com/
       target: _self 
@@ -24,7 +24,7 @@
       href: https://reddit.com/
       target: _self 
   - GitHub:
-    - icon: si-github
+    - icon: github-light.png
       abbr: GH
       href: https://github.com/
       target: _self 

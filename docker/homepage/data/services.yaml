@@ -21,7 +21,7 @@
         username: "{{HOMEPAGE_VAR_PROXMOX_API_TOKEN_ID}}"
         password: "{{HOMEPAGE_VAR_PROXMOX_API_TOKEN_SECRET}}"
   - Uptime Kuma:
-      icon: uptime-kuma.svg
+      icon: uptime-kuma.png
       href: "{{HOMEPAGE_VAR_UPTIME_URL}}"
       description: service uptime
       siteMonitor: "{{HOMEPAGE_VAR_UPTIME_URL}}"
@@ -49,13 +49,13 @@
       siteMonitor: "{{HOMEPAGE_VAR_OPENWRT_URL}}"
       target: _self 
   - PiHole:
-      icon: pi-hole.svg
+      icon: pi-hole.png
       href: "{{HOMEPAGE_VAR_PIHOLE_URL}}"
       description: dns
       siteMonitor: "{{HOMEPAGE_VAR_PIHOLE_URL}}"
       target: _self 
   - Traefik:
-      icon: traefik.svg
+      icon: traefik.png
       href: "{{HOMEPAGE_VAR_TRAEFIK_URL}}"
       description: proxy
       siteMonitor: "{{HOMEPAGE_VAR_TRAEFIK_URL}}"
@@ -74,13 +74,13 @@
       siteMonitor: "{{HOMEPAGE_VAR_ACTUAL_URL}}"
       target: _self 
   - Jellyfin:
-      icon: jellyfin.svg
+      icon: jellyfin.png
       href: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
       description: local streaming
       siteMonitor: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
       target: _self 
   - Nextcloud:
-      icon: nextcloud-blue.svg
+      icon: nextcloud-blue.png
       href: "{{HOMEPAGE_VAR_NEXTCLOUD_URL}}"
       description: photo backup
       siteMonitor: "{{HOMEPAGE_VAR_NEXTCLOUD_URL}}"
@@ -99,49 +99,49 @@
       target: _self 
 - Servarr:
   - Sonarr:
-      icon: sonarr.svg
+      icon: sonarr.png
       href: "{{HOMEPAGE_VAR_SONARR_URL}}"
       description: tv
       siteMonitor: "{{HOMEPAGE_VAR_SONARR_URL}}"
       target: _self 
   - Radarr:
-      icon: radarr.svg
+      icon: radarr.png
       href: "{{HOMEPAGE_VAR_RADARR_URL}}"
       description: movies
       siteMonitor: "{{HOMEPAGE_VAR_RADARR_URL}}"
       target: _self 
   - Lidarr:
-      icon: lidarr.svg
+      icon: lidarr.png
       href: "{{HOMEPAGE_VAR_LIDARR_URL}}"
       description: music
       siteMonitor: "{{HOMEPAGE_VAR_LIDARR_URL}}"
       target: _self 
   - Readarr:
-      icon: readarr.svg
+      icon: readarr.png
       href: "{{HOMEPAGE_VAR_READARR_URL}}"
       description: books
       siteMonitor: "{{HOMEPAGE_VAR_READARR_URL}}"
       target: _self 
   - qBittorrent:
-      icon: qbittorrent.svg
+      icon: qbittorrent.png
       href: "{{HOMEPAGE_VAR_QBITTORRENT_URL}}"
       description: torrents
       siteMonitor: "{{HOMEPAGE_VAR_QBITTORRENT_URL}}"
       target: _self 
   - Bazarr:
-      icon: bazarr.svg
+      icon: bazarr.png
       href: "{{HOMEPAGE_VAR_BAZARR_URL}}"
       description: subtitles
       siteMonitor: "{{HOMEPAGE_VAR_BAZARR_URL}}"
       target: _self 
   - Prowlarr:
-      icon: prowlarr.svg
+      icon: prowlarr.png
       href: "{{HOMEPAGE_VAR_PROWLARR_URL}}"
       description: indexer
       siteMonitor: "{{HOMEPAGE_VAR_PROWLARR_URL}}"
       target: _self 
   - FlareSolverr:
-      icon: flaresolverr.svg
+      icon: flaresolverr.png
       href: "{{HOMEPAGE_VAR_FLARESOLVERR_URL}}"
       description: cloudflare bypass
       siteMonitor: "{{HOMEPAGE_VAR_FLARESOLVERR_URL}}"
