@@ -1,6 +1,6 @@
 ---
 - name: Init server from fresh Ubuntu install
-  hosts: "init"
+  hosts: "server_setup_proxmox"
   vars_files:
   - ~/.ansible/vault/ansible_ssh_pass.yml
   - ~/.ansible/vault/ansible_become_pass.yml
