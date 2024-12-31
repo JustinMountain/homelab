@@ -9,16 +9,16 @@
     authorized_keys_decoded: "{{ authorized_keys_contents.content | b64decode }}"
 
 - name: Copy Ansible SSH key to target hosts
-  command: ssh-copy-id -i /home/wsl/.ssh/ansible.pub {{ ansible_user }}@{{ inventory_hostname }}
+  command: ssh-copy-id -i ~/.ssh/ansible.pub {{ ansible_user }}@{{ inventory_hostname }}
   delegate_to: localhost
   ignore_errors: yes
   when: "'ansible' not in authorized_keys_decoded"
 
-- name: Copy admin SSH key to target hosts
-  command: ssh-copy-id -i /home/wsl/.ssh/admin.pub {{ ansible_user }}@{{ inventory_hostname }}
+- name: Copy proxmox-win11 SSH key to target hosts
+  command: ssh-copy-id -f -i ~/.ssh/proxmox-win11.pub {{ ansible_user }}@{{ inventory_hostname }}
   delegate_to: localhost
   ignore_errors: yes
-  when: "'admin' not in authorized_keys_decoded"
+  when: "'proxmox-win11' not in authorized_keys_decoded"
 
 - name: Wait for SSH to be available
   wait_for:
