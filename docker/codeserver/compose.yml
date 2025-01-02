@@ -12,9 +12,10 @@ services:
       - SUDO_PASSWORD=${SUDO_PASSWORD} #optional
       - SUDO_PASSWORD_HASH=${SUDO_HASHED} #optional
       - PROXY_DOMAIN=${DOMAIN_ADDRESS} #optional
-      - DEFAULT_WORKSPACE=${DEFAULT_WORKSPACE} #optional
+      - DEFAULT_WORKSPACE=/config/workspace #optional
     volumes:
       - ./config:/config
+      - ${DEFAULT_WORKSPACE}:/config/workspace
     ports:
       - 8443:8443
     restart: unless-stopped

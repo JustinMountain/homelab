@@ -2,3 +2,5 @@
 /docker/homepage-*
 /ansible/playbooks/services/up_t*.yml
 /ansible/playbooks/services/down_t*.yml
+
+/docker/codeserver/config
