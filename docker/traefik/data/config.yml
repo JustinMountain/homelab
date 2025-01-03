@@ -48,6 +48,15 @@ http:
         - https-redirectscheme
       tls: {}
       service: nextcloud
+    jellyfin:
+      entryPoints:
+        - "https"
+      rule: "Host(`jellyfin.igarashimountain.com`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: jellyfin
     torrent:
       entryPoints:
         - "https"
@@ -132,7 +141,7 @@ http:
     pihole:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.100:80"
+          - url: "http://192.168.1.100:8080"
         passHostHeader: true
     proxmox:
       loadBalancer:
@@ -148,6 +157,11 @@ http:
       loadBalancer:
         servers:
           - url: "https://192.168.1.210"
+        passHostHeader: true
+    jellyfin:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.105:8096"
         passHostHeader: true
     torrent:
       loadBalancer:
