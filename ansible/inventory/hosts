@@ -2,7 +2,7 @@
 192.168.1.229
 
 [server_setup_proxmox]
-192.168.1.188
+192.168.1.205
 
 [docker:children]
 essentials
@@ -13,7 +13,7 @@ servarr
 192.168.1.230
 
 [services]
-192.168.1.132
+192.168.1.130
 
 [servarr]
-192.168.1.232
+192.168.1.131

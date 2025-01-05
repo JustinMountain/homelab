@@ -9,5 +9,5 @@ network:
         - to: default
           via: {{ gateway }}
       nameservers:
-          addresses: [1.1.1.1,8.8.8.8] # dns resolution
+        addresses: [{{ dns_server_1 }},{{ dns_server_2 }}] # dns resolution
   
