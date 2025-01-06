@@ -4,9 +4,10 @@ services:
     image: actualbudget/actual-server:${ACTUAL_VERSION}
     container_name: actual
     # ports:
-    #   - "5006:5006"
+      # - "5006:5006"
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
       - "traefik.http.routers.actual.rule=Host(`actual.igarashimountain.com`)"
       - "traefik.http.routers.actual.entrypoints=https"
       - "traefik.http.routers.actual.tls=true"
@@ -14,7 +15,7 @@ services:
     networks:
       - proxy
     volumes:
-      - ./actual:/data
+      - ./data:/data
     restart: unless-stopped
 
 networks:
