@@ -1,13 +1,13 @@
-[sandbox]
-192.168.1.229
-
 [server_setup_proxmox]
-192.168.1.205
+192.168.1.215
 
 [docker:children]
 essentials
 services
 servarr
+
+[sandbox]
+192.168.1.122
 
 [essentials]
 192.168.1.230

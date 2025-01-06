@@ -3,7 +3,7 @@
   hosts: "sandbox"
   become: yes
   vars:
-    stack_name: "pihole"
+    stack_name: "homepage"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
