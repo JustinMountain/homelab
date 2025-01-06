@@ -2,7 +2,7 @@
 services:
   uptime:
     container_name: uptime-kuma
-    image: louislam/uptime-kuma:1.23.13
+    image: louislam/uptime-kuma:${UPTIME_VERSION}
     # ports:
       # - 3001:3001
     labels:
