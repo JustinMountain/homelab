@@ -12,8 +12,8 @@ servarr
 [essentials]
 192.168.1.230
 
-[services]
-192.168.1.130
-
 [servarr]
 192.168.1.131
+
+[services]
+192.168.1.132

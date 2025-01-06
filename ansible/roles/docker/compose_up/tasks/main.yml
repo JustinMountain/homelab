@@ -27,33 +27,33 @@
 - name: Check if {{ stack_name }}/data exists on host
   delegate_to: localhost
   stat:
-    path: "~/homelab/docker/{{ stack_name }}/data"
+    path: "/home/justin/homelab/docker/{{ stack_name }}/data"
   register: data_dir
 
 - name: Find files in {{ stack_name }}/data
   delegate_to: localhost
   find:
-    paths: "~/homelab/docker/{{ stack_name }}/data"
+    paths: "/home/justin/homelab/docker/{{ stack_name }}/data"
     recurse: yes
   register: files_to_copy
   when: data_dir.stat.exists
 
 - name: Create a directory for {{ stack_name }}/data on remote
   ansible.builtin.file:
-    path: "{{ user_home }}/{{ stack_name }}/{{ stack_name }}" 
+    path: "{{ user_home }}/{{ stack_name }}/data" 
     state: directory
     mode: 0755
   when: data_dir.stat.exists
 
 - name: Check if acme.json file is present on remote (for traefik)
   stat:
-    path: "{{ user_home }}/{{ stack_name }}/{{ stack_name }}/acme.json"
+    path: "{{ user_home }}/{{ stack_name }}/data/acme.json"
   register: acme_json
   when: stack_name == 'traefik'
 
 - name: Create acme.json file when not found on remote (for traefik)
   ansible.builtin.file:
-    path: "{{ user_home }}/{{ stack_name }}/{{ stack_name }}/acme.json"
+    path: "{{ user_home }}/{{ stack_name }}/data/acme.json"
     state: touch
     mode: 0600
   when: 
@@ -64,7 +64,7 @@
 - name: Copy {{ stack_name }}/data contents to remote
   copy:
     src: "{{ item.path }}"
-    dest: "{{ user_home }}/{{ stack_name }}/{{ stack_name }}"
+    dest: "{{ user_home }}/{{ stack_name }}/data"
   with_items: "{{ files_to_copy.files }}"
   when:
     - data_dir.stat.exists
