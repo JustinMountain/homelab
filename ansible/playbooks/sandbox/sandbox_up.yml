@@ -3,7 +3,7 @@
   hosts: "sandbox"
   become: yes
   vars:
-    stack_name: "homepage"
+    stack_name: "uptime_kuma"
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:

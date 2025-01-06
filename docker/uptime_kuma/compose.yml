@@ -7,6 +7,7 @@ services:
       # - 3001:3001
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
       - "traefik.http.routers.uptime.rule=Host(`uptime.igarashimountain.com`)"
       - "traefik.http.routers.uptime.entrypoints=https"
       - "traefik.http.routers.uptime.tls=true"
@@ -14,7 +15,8 @@ services:
     networks:
       - proxy
     volumes:
-      - ./uptime:/app/data
+      - ./data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
