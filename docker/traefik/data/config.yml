@@ -155,7 +155,7 @@ http:
     proxmox:
       loadBalancer:
         servers:
-          - url: "https://192.168.1.200:8006"
+          - url: "https://192.168.1.10:8006"
         passHostHeader: true
     nas:
       loadBalancer:
@@ -180,42 +180,42 @@ http:
     torrent:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.232:8080"
+          - url: "http://192.168.1.131:8080"
         passHostHeader: true
     sonarr:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.232:8989"
+          - url: "http://192.168.1.131:8989"
         passHostHeader: true
     radarr:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.232:7878"
+          - url: "http://192.168.1.131:7878"
         passHostHeader: true
     Lidarr:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.232:8686"
+          - url: "http://192.168.1.131:8686"
         passHostHeader: true
     readarr:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.232:8787"
+          - url: "http://192.168.1.131:8787"
         passHostHeader: true
     prowlarr:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.232:9696"
+          - url: "http://192.168.1.131:9696"
         passHostHeader: true
     flaresolverr:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.232:8191"
+          - url: "http://192.168.1.131:8191"
         passHostHeader: true
     bazarr:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.232:6767"
+          - url: "http://192.168.1.131:6767"
         passHostHeader: true
 #endregion
   middlewares:

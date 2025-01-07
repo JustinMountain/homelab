@@ -2,19 +2,21 @@
 
 set -e  # Exit immediately if a command exits with a non-zero status
 
-DOCKER_COMPOSE_FILE="$HOME/servarr/docker-compose.yml"
-DOCKER_DOWN="docker-compose down"
-DOCKER_UP="docker-compose up -d"
+echo "$(date '+%Y-%m-%d %H:%M:%S') - Starting restartStack.sh for Servarr..."
+
+DOCKER_COMPOSE_FILE="$HOME/servarr/compose.yml"
+DOCKER_DOWN="docker compose down"
+DOCKER_UP="docker compose up -d"
 
 # Check if docker-compose file exists
 if [ ! -f "$DOCKER_COMPOSE_FILE" ]; then
-    echo "Error: docker-compose.yml not found at $DOCKER_COMPOSE_FILE"
+    echo "Error: compose.yml not found at $DOCKER_COMPOSE_FILE"
     exit 1
 fi
 
 cd ~/servarr
 
-echo "Stopping containers..."
+echo "$(date '+%Y-%m-%d %H:%M:%S') - Stopping containers..."
 $DOCKER_DOWN
 if [ $? -ne 0 ]; then
     echo "Error: Failed to stop containers"

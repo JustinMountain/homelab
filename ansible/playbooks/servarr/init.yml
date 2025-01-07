@@ -1,5 +1,5 @@
 ---
-- name: Ensure the Sandbox stack of Docker containers up to date on target
+- name: Initialize the Servarr stack of Docker containers
   hosts: "servarr"
   become: yes
   vars:

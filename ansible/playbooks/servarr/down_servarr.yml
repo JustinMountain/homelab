@@ -1,5 +1,5 @@
 ---
-- name: Tear down the Sandbox stack of Docker containers on target
+- name: Tear down the Servarr stack of Docker containers
   hosts: "servarr"
   become: yes
   vars:

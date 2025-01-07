@@ -1,0 +1,10 @@
+---
+- name: Deploy the Servarr stack of Docker containers
+  hosts: "servarr"
+  become: yes
+  vars:
+    stack_name: "servarr"
+  vars_files:
+  - ~/.ansible/vault/ansible_become_pass.yml
+  roles:
+  - role: docker/compose_up
