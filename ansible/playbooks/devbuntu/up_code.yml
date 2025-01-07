@@ -1,0 +1,10 @@
+---
+- name: Deploy the Code Server stack of Docker containers
+  hosts: "devbuntu"
+  become: yes
+  vars_files:
+  - ~/.ansible/vault/ansible_become_pass.yml
+  roles:
+  - role: docker/compose_up
+    vars:
+      stack_name: "codeserver"

@@ -1,10 +1,10 @@
 ---
-- name: Tear down the Pihole stack of Docker containers
-  hosts: "services"
+- name: Tear down the Code Server stack of Docker containers
+  hosts: "devbuntu"
   become: yes
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
   - role: docker/compose_down
     vars:
-      stack_name: "pihole"
+      stack_name: "codeserver"

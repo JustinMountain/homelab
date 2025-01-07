@@ -1,18 +1,18 @@
 ---
 - name: Check if restartStack.sh file exists
   stat:
-    path: "{{ user_home }}/{{ stack_name }}/{{ stack_name }}/restartStack.sh"
+    path: "{{ user_home }}/{{ stack_name }}/data/restartStack.sh"
   register: restart_script
 
 - name: Ensure restartStack.sh has 755 permissions
   file:
-    path: "{{ user_home }}/{{ stack_name }}/{{ stack_name }}/restartStack.sh"
+    path: "{{ user_home }}/{{ stack_name }}/data/restartStack.sh"
     mode: '0755'
   when: restart_script.stat.exists
 
 - name: Define logs file path
   set_fact:
-    logs_file_path: "{{ user_home }}/{{ stack_name }}/{{ stack_name }}/logs.txt"
+    logs_file_path: "{{ user_home }}/{{ stack_name }}/data/logs.txt"
 
 - name: Ensure logs.txt file exists
   file:
@@ -26,10 +26,11 @@
     minute: "0"
     hour: "*/4"
     job: "{{ restart_script.stat.path }} >> {{ logs_file_path }} 2>&1"
-    user: "{{ ansible_user }}"
+    user: "root"
   when: restart_script.stat.exists
   register: cron_job_result
-
+  become: yes
+  
 - name: Restart cron service
   systemd:
     name: cron

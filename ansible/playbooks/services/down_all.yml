@@ -7,11 +7,27 @@
   roles:
   - role: docker/compose_down
     vars:
+      stack_name: "uptime_kuma"
+
+  - role: docker/compose_down
+    vars:
       stack_name: "open_webui"
 
   - role: docker/compose_down
     vars:
-      stack_name: "jellyfin"
+      stack_name: "mealie"
+
+  # - role: docker/compose_down
+  #   vars:
+  #     stack_name: "jellyfin"
+
+  - role: docker/compose_down
+    vars:
+      stack_name: "homepage"
+
+  # - role: docker/compose_down
+  #   vars:
+  #     stack_name: "change_detection"
 
   - role: docker/compose_down
     vars:
@@ -19,8 +35,4 @@
 
   - role: docker/compose_down
     vars:
-      stack_name: "change_detection"
-
-  - role: docker/compose_down
-    vars:
-      stack_name: "mealie"
+      stack_name: "traefik"

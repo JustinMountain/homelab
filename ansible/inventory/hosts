@@ -1,16 +1,14 @@
 [server_setup_proxmox]
 192.168.1.215
 
-[docker:children]
-essentials
-services
-servarr
+[lxcpihole]
+192.168.1.105
+
+[devbuntu]
+192.168.1.121
 
 [sandbox]
 192.168.1.122
-
-[essentials]
-192.168.1.230
 
 [servarr]
 192.168.1.131

@@ -1,10 +1,10 @@
 ---
-- name: Deploy the Pihole stack of Docker containers
-  hosts: "services"
+- name: Tear down the Pihole stack of Docker containers
+  hosts: "lxcpihole"
   become: yes
   vars_files:
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
-  - role: docker/compose_up
+  - role: docker/compose_down
     vars:
       stack_name: "pihole"
