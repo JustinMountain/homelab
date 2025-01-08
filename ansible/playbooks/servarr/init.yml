@@ -8,5 +8,5 @@
   - ~/.ansible/vault/ansible_become_pass.yml
   roles:
   - role: docker/compose_up
-  - role: docker/container_qbittorrent_dark_mode
-  - role: docker/cronjob_restart_stack
+  - role: init/container_qbittorrent_dark_mode
+  - role: init/cronjob_restart_stack
