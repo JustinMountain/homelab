@@ -29,6 +29,17 @@
         type: uptimekuma
         url: "{{HOMEPAGE_VAR_UPTIME_URL}}"
         slug: "{{HOMEPAGE_VAR_UPTIME_SLUG}}"
+  - TrueNAS:
+      icon: truenas.png
+      href: "{{HOMEPAGE_VAR_TRUENAS_URL}}"
+      description: tyrannoserver
+      target: _self 
+      widget:
+        type: truenas
+        url: "{{HOMEPAGE_VAR_TRUENAS_IP}}"
+        key: "{{HOMEPAGE_VAR_TRUENAS_KEY}}"
+        enablePools: true # optional, defaults to false
+        nasType: scale
   - BrontosaurNAS:
       icon: mdi-database
       href: "{{HOMEPAGE_VAR_NAS_URL}}"

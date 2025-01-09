@@ -39,6 +39,15 @@ http:
         - https-redirectscheme
       tls: {}
       service: nas
+    truenas:
+      entryPoints:
+        - "https"
+      rule: "Host(`truenas.igarashimountain.com`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: truenas
     nextcloud:
       entryPoints:
         - "https"
@@ -161,6 +170,11 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.1.101:8080"
+        passHostHeader: true
+    truenas:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.111"
         passHostHeader: true
     nextcloud:
       loadBalancer:
