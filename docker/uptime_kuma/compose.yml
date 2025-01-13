@@ -3,8 +3,8 @@ services:
   uptime:
     container_name: uptime-kuma
     image: louislam/uptime-kuma:${UPTIME_VERSION}
-    # ports:
-      # - 3001:3001
+    ports:
+      - 3001:3001
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"

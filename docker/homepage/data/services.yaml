@@ -12,14 +12,14 @@
   - Proxmox:
       icon: proxmox.png
       href: "{{HOMEPAGE_VAR_PROXMOX_URL}}"
-      description: tyrannoserver
+      description: veloserver
       target: _self 
       widget:
         type: proxmox
         url: "{{HOMEPAGE_VAR_PROXMOX_IP}}"
         username: "{{HOMEPAGE_VAR_PROXMOX_API_TOKEN_ID}}"
         password: "{{HOMEPAGE_VAR_PROXMOX_API_TOKEN_SECRET}}"
-        node: tyrannoserver
+        node: veloserver
   - Uptime Kuma:
       icon: uptime-kuma.png
       href: "{{HOMEPAGE_VAR_UPTIME_URL}}"
@@ -27,7 +27,7 @@
       target: _self 
       widget:
         type: uptimekuma
-        url: "{{HOMEPAGE_VAR_UPTIME_URL}}"
+        url: "{{HOMEPAGE_VAR_UPTIME_IP}}"
         slug: "{{HOMEPAGE_VAR_UPTIME_SLUG}}"
   - TrueNAS:
       icon: truenas.png

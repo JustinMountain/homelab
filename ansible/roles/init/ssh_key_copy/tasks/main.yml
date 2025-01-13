@@ -14,11 +14,11 @@
   ignore_errors: yes
   when: "'ansible' not in authorized_keys_decoded"
 
-- name: Copy proxmox-win11 SSH key to target hosts
-  command: ssh-copy-id -f -i ~/.ssh/proxmox-win11.pub {{ ansible_user }}@{{ inventory_hostname }}
+- name: Copy admin SSH key to target hosts
+  command: ssh-copy-id -f -i ~/.ssh/admin.pub {{ ansible_user }}@{{ inventory_hostname }}
   delegate_to: localhost
   ignore_errors: yes
-  when: "'proxmox-win11' not in authorized_keys_decoded"
+  when: "'admin' not in authorized_keys_decoded"
 
 - name: Wait for SSH to be available
   wait_for:

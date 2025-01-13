@@ -8,7 +8,7 @@
 - name: Check if {{ stack_name }} requires .env file
   delegate_to: localhost
   stat:
-    path: "/home/justin/homelab/docker/{{ stack_name }}/.env"
+    path: "/home/wsl/homelab/docker/{{ stack_name }}/.env"
   register: env_file
 
 - name: Copy {{ stack_name }} .env to remote host
@@ -27,13 +27,13 @@
 - name: Check if {{ stack_name }}/data exists on host
   delegate_to: localhost
   stat:
-    path: "/home/justin/homelab/docker/{{ stack_name }}/data"
+    path: "/home/wsl/homelab/docker/{{ stack_name }}/data"
   register: data_dir
 
 - name: Find files in {{ stack_name }}/data
   delegate_to: localhost
   find:
-    paths: "/home/justin/homelab/docker/{{ stack_name }}/data"
+    paths: "/home/wsl/homelab/docker/{{ stack_name }}/data"
     recurse: yes
   register: files_to_copy
   when: data_dir.stat.exists
