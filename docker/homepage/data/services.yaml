@@ -29,17 +29,17 @@
         type: uptimekuma
         url: "{{HOMEPAGE_VAR_UPTIME_IP}}"
         slug: "{{HOMEPAGE_VAR_UPTIME_SLUG}}"
-  - TrueNAS:
-      icon: truenas.png
-      href: "{{HOMEPAGE_VAR_TRUENAS_URL}}"
-      description: tyrannoserver
-      target: _self 
-      widget:
-        type: truenas
-        url: "{{HOMEPAGE_VAR_TRUENAS_IP}}"
-        key: "{{HOMEPAGE_VAR_TRUENAS_KEY}}"
-        enablePools: true # optional, defaults to false
-        nasType: scale
+  # - TrueNAS:
+  #     icon: truenas.png
+  #     href: "{{HOMEPAGE_VAR_TRUENAS_URL}}"
+  #     description: tyrannoserver
+  #     target: _self 
+  #     widget:
+  #       type: truenas
+  #       url: "{{HOMEPAGE_VAR_TRUENAS_IP}}"
+  #       key: "{{HOMEPAGE_VAR_TRUENAS_KEY}}"
+  #       enablePools: true # optional, defaults to false
+  #       nasType: scale
   - BrontosaurNAS:
       icon: mdi-database
       href: "{{HOMEPAGE_VAR_NAS_URL}}"
@@ -72,26 +72,26 @@
       href: "{{HOMEPAGE_VAR_CHAT_URL}}"
       description: chatbots
       target: _self 
-  - Code Server:
-      icon: code.png
-      href: "{{HOMEPAGE_VAR_CODE_URL}}"
-      description: vscode
-      target: _self 
+  # - Code Server:
+  #     icon: code.png
+  #     href: "{{HOMEPAGE_VAR_CODE_URL}}"
+  #     description: vscode
+  #     target: _self 
   - Actual Budget:
       icon: actual.png
       href: "{{HOMEPAGE_VAR_ACTUAL_URL}}"
       description: budgets
       target: _self 
-  - Jellyfin:
-      icon: jellyfin.png
-      href: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
-      description: local streaming
-      target: _self 
-  - Nextcloud:
-      icon: nextcloud-blue.png
-      href: "{{HOMEPAGE_VAR_NEXTCLOUD_URL}}"
-      description: photo backup
-      target: _self 
+  # - Jellyfin:
+  #     icon: jellyfin.png
+  #     href: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
+  #     description: local streaming
+  #     target: _self 
+  # - Nextcloud:
+  #     icon: nextcloud-blue.png
+  #     href: "{{HOMEPAGE_VAR_NEXTCLOUD_URL}}"
+  #     description: photo backup
+  #     target: _self 
   - Change Detection:
       icon: changedetection-io.png
       href: "{{HOMEPAGE_VAR_CHANGE_DETECTION_URL}}"
@@ -102,44 +102,44 @@
       href: "{{HOMEPAGE_VAR_MEALIE_URL}}"
       description: recipes
       target: _self 
-- Servarr:
-  - Sonarr:
-      icon: sonarr.png
-      href: "{{HOMEPAGE_VAR_SONARR_URL}}"
-      description: tv
-      target: _self 
-  - Radarr:
-      icon: radarr.png
-      href: "{{HOMEPAGE_VAR_RADARR_URL}}"
-      description: movies
-      target: _self 
-  - Lidarr:
-      icon: lidarr.png
-      href: "{{HOMEPAGE_VAR_LIDARR_URL}}"
-      description: music
-      target: _self 
-  - Readarr:
-      icon: readarr.png
-      href: "{{HOMEPAGE_VAR_READARR_URL}}"
-      description: books
-      target: _self 
-  - qBittorrent:
-      icon: qbittorrent.png
-      href: "{{HOMEPAGE_VAR_QBITTORRENT_URL}}"
-      description: torrents
-      target: _self 
-  - Bazarr:
-      icon: bazarr.png
-      href: "{{HOMEPAGE_VAR_BAZARR_URL}}"
-      description: subtitles
-      target: _self 
-  - Prowlarr:
-      icon: prowlarr.png
-      href: "{{HOMEPAGE_VAR_PROWLARR_URL}}"
-      description: indexer
-      target: _self 
-  - FlareSolverr:
-      icon: flaresolverr.png
-      href: "{{HOMEPAGE_VAR_FLARESOLVERR_URL}}"
-      description: cloudflare bypass
-      target: _self 
+# - Servarr:
+#   - Sonarr:
+#       icon: sonarr.png
+#       href: "{{HOMEPAGE_VAR_SONARR_URL}}"
+#       description: tv
+#       target: _self 
+#   - Radarr:
+#       icon: radarr.png
+#       href: "{{HOMEPAGE_VAR_RADARR_URL}}"
+#       description: movies
+#       target: _self 
+#   - Lidarr:
+#       icon: lidarr.png
+#       href: "{{HOMEPAGE_VAR_LIDARR_URL}}"
+#       description: music
+#       target: _self 
+#   - Readarr:
+#       icon: readarr.png
+#       href: "{{HOMEPAGE_VAR_READARR_URL}}"
+#       description: books
+#       target: _self 
+#   - qBittorrent:
+#       icon: qbittorrent.png
+#       href: "{{HOMEPAGE_VAR_QBITTORRENT_URL}}"
+#       description: torrents
+#       target: _self 
+#   - Bazarr:
+#       icon: bazarr.png
+#       href: "{{HOMEPAGE_VAR_BAZARR_URL}}"
+#       description: subtitles
+#       target: _self 
+#   - Prowlarr:
+#       icon: prowlarr.png
+#       href: "{{HOMEPAGE_VAR_PROWLARR_URL}}"
+#       description: indexer
+#       target: _self 
+#   - FlareSolverr:
+#       icon: flaresolverr.png
+#       href: "{{HOMEPAGE_VAR_FLARESOLVERR_URL}}"
+#       description: cloudflare bypass
+#       target: _self 

@@ -1,6 +1,6 @@
 ---
 # For configuration options and examples, please see:
-# https://gethomepage.dev/latest/configs/bookmarks
+# https://gethomepage.dev/configs/bookmarks
 
 - Socials:
   - YouTube:
@@ -8,20 +8,20 @@
       abbr: YT
       href: https://youtube.com/
       target: _self 
-  - Messenger:
-    - icon: facebook-messenger.png
-      abbr: FB
-      href: https://messenger.com/
+  - WhatsApp:
+    - icon: whatsapp.png
+      abbr: "??"
+      href: https://web.whatsapp.com/
       target: _self 
   - LinkedIn:
     - icon: linkedin.png
       abbr: LI
       href: https://linkedin.com/
       target: _self 
-  - Reddit:
-    - icon: reddit.png
-      abbr: RE
-      href: https://reddit.com/
+  - Messenger:
+    - icon: facebook-messenger.png
+      abbr: FB
+      href: https://messenger.com/
       target: _self 
   - GitHub:
     - icon: github-light.png

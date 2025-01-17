@@ -37,7 +37,7 @@ services:
       - TORRENTING_PORT=6881
     volumes:
       - ./qbittorrent:/config
-      - smb-downloads:/downloads
+      - nfs-downloads:/downloads
     restart: unless-stopped
 
   sonarr:
@@ -50,8 +50,8 @@ services:
       - TZ=${TZ}
     volumes:
       - ./sonarr:/config
-      - smb-downloads:/downloads
-      - smb-tv:/tv
+      - nfs-downloads:/downloads
+      - nfs-tv:/tv
     restart: unless-stopped
 
   radarr:
@@ -64,8 +64,8 @@ services:
       - TZ=${TZ}
     volumes:
       - ./radarr:/config
-      - smb-downloads:/downloads
-      - smb-movies:/movies
+      - nfs-downloads:/downloads
+      - nfs-movies:/movies
     restart: unless-stopped
 
   lidarr:
@@ -78,8 +78,8 @@ services:
       - TZ=${TZ}
     volumes:
       - ./lidarr:/config
-      - smb-downloads:/downloads
-      - smb-music:/music 
+      - nfs-downloads:/downloads
+      - nfs-music:/music 
     restart: unless-stopped
 
   readarr:
@@ -92,8 +92,8 @@ services:
       - TZ=${TZ}
     volumes:
       - ./readarr:/config
-      - smb-downloads:/downloads
-      - smb-books:/books 
+      - nfs-downloads:/downloads
+      - nfs-books:/books 
     restart: unless-stopped
 
   prowlarr:
@@ -129,38 +129,46 @@ services:
       - TZ=${TZ}
     volumes:
       - ./bazarr:/config
-      - smb-movies:/movies
-      - smb-tv:/tv
+      - nfs-movies:/movies
+      - nfs-tv:/tv
     restart: unless-stopped
 
 volumes:
-  smb-downloads:
+  nfs-downloads:
     driver: local
     driver_opts:
-      type: cifs
-      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},rw
-      device: "//${SMB_SHARE_IP}/entertainment/downloads"
-  smb-tv:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      device: ":/Multimedia/Downloads"
+  nfs-tv:
     driver: local
     driver_opts:
-      type: cifs
-      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},rw
-      device: "//${SMB_SHARE_IP}/entertainment/tv"
-  smb-movies:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      device: ":/Multimedia/TV"
+  nfs-movies:
     driver: local
     driver_opts:
-      type: cifs
-      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},rw
-      device: "//${SMB_SHARE_IP}/entertainment/movies"
-  smb-music:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      device: ":/Multimedia/Movies"
+  nfs-music:
     driver: local
     driver_opts:
-      type: cifs
-      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},rw
-      device: "//${SMB_SHARE_IP}/entertainment/music"
-  smb-books:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      device: ":/Multimedia/Music"
+  nfs-books:
     driver: local
     driver_opts:
-      type: cifs
-      o: username=${SMB_USERNAME},password=${SMB_PASSWORD},rw
-      device: "//${SMB_SHARE_IP}/entertainment/books"
+      type: nfs
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      device: ":/Multimedia/Books"
+
+  # SMB Example
+  # smb-downloads:
+  #   driver: local
+  #   driver_opts:
+  #     type: cifs
+  #     o: username=${SMB_USERNAME},password=${SMB_PASSWORD},rw
+  #     device: "//${SMB_SHARE_IP}/entertainment/downloads"
