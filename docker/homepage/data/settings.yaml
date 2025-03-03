@@ -20,7 +20,7 @@ headerStyle: clean
 useEqualHeights: true
 
 layout:
-  Infrastructure:
+  StegosaurNAS:
     header: true
     style: row
     columns: 4

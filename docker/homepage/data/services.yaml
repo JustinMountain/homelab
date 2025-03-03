@@ -8,18 +8,28 @@
 
 # widgets: https://gethomepage.dev/widgets/
 
-- Infrastructure:
+- StegosaurNAS:
   - Proxmox:
       icon: proxmox.png
       href: "{{HOMEPAGE_VAR_PROXMOX_URL}}"
-      description: veloserver
+      description: virtualization
       target: _self 
       widget:
         type: proxmox
         url: "{{HOMEPAGE_VAR_PROXMOX_IP}}"
         username: "{{HOMEPAGE_VAR_PROXMOX_API_TOKEN_ID}}"
         password: "{{HOMEPAGE_VAR_PROXMOX_API_TOKEN_SECRET}}"
-        node: veloserver
+        node: stegosaurnas
+  - Proxmox Backup Server:
+      icon: proxmox-light.png
+      href: "{{HOMEPAGE_VAR_PBS_URL}}"
+      description: backups
+      target: _self 
+      widget:
+        type: proxmoxbackupserver
+        url: "{{HOMEPAGE_VAR_PBS_IP}}"
+        username: "{{HOMEPAGE_VAR_PBS_API_TOKEN_ID}}"
+        password: "{{HOMEPAGE_VAR_PBS_API_TOKEN_SECRET}}"
   - Uptime Kuma:
       icon: uptime-kuma.png
       href: "{{HOMEPAGE_VAR_UPTIME_URL}}"
@@ -29,17 +39,27 @@
         type: uptimekuma
         url: "{{HOMEPAGE_VAR_UPTIME_IP}}"
         slug: "{{HOMEPAGE_VAR_UPTIME_SLUG}}"
-  # - TrueNAS:
-  #     icon: truenas.png
-  #     href: "{{HOMEPAGE_VAR_TRUENAS_URL}}"
-  #     description: tyrannoserver
-  #     target: _self 
-  #     widget:
-  #       type: truenas
-  #       url: "{{HOMEPAGE_VAR_TRUENAS_IP}}"
-  #       key: "{{HOMEPAGE_VAR_TRUENAS_KEY}}"
-  #       enablePools: true # optional, defaults to false
-  #       nasType: scale
+  - PiHole:
+      icon: pi-hole.png
+      href: "{{HOMEPAGE_VAR_PIHOLE_URL}}"
+      description: dns
+      target: _self 
+      widget:
+        type: pihole
+        url: "{{HOMEPAGE_VAR_PIHOLE_IP}}"
+        # version: 6 # required if running v6 or higher, defaults to 5
+        key: "{{HOMEPAGE_VAR_PIHOLE_API_KEY}}"
+  - TrueNAS:
+      icon: truenas.png
+      href: "{{HOMEPAGE_VAR_TRUENAS_URL}}"
+      description: network storage
+      target: _self 
+      widget:
+        type: truenas
+        url: "{{HOMEPAGE_VAR_TRUENAS_IP}}"
+        key: "{{HOMEPAGE_VAR_TRUENAS_KEY}}"
+        enablePools: true # optional, defaults to false
+        nasType: scale
   - BrontosaurNAS:
       icon: mdi-database
       href: "{{HOMEPAGE_VAR_NAS_URL}}"
@@ -56,11 +76,6 @@
       href: "{{HOMEPAGE_VAR_OPENWRT_URL}}"
       description: router/firewall
       target: _self 
-  - PiHole:
-      icon: pi-hole.png
-      href: "{{HOMEPAGE_VAR_PIHOLE_URL}}"
-      description: dns
-      target: _self 
   - Traefik:
       icon: traefik.png
       href: "{{HOMEPAGE_VAR_TRAEFIK_URL}}"
@@ -72,28 +87,18 @@
       href: "{{HOMEPAGE_VAR_CHAT_URL}}"
       description: chatbots
       target: _self 
-  # - Code Server:
-  #     icon: code.png
-  #     href: "{{HOMEPAGE_VAR_CODE_URL}}"
-  #     description: vscode
-  #     target: _self 
   - Actual Budget:
-      icon: actual.png
+      icon: actual-budget.png
       href: "{{HOMEPAGE_VAR_ACTUAL_URL}}"
       description: budgets
       target: _self 
-  # - Jellyfin:
-  #     icon: jellyfin.png
-  #     href: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
-  #     description: local streaming
-  #     target: _self 
-  # - Nextcloud:
-  #     icon: nextcloud-blue.png
-  #     href: "{{HOMEPAGE_VAR_NEXTCLOUD_URL}}"
-  #     description: photo backup
-  #     target: _self 
+  - Jellyfin:
+      icon: jellyfin.png
+      href: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
+      description: local streaming
+      target: _self 
   - Change Detection:
-      icon: changedetection-io.png
+      icon: changedetection.png
       href: "{{HOMEPAGE_VAR_CHANGE_DETECTION_URL}}"
       description: monitor changes
       target: _self 
@@ -102,44 +107,44 @@
       href: "{{HOMEPAGE_VAR_MEALIE_URL}}"
       description: recipes
       target: _self 
-# - Servarr:
-#   - Sonarr:
-#       icon: sonarr.png
-#       href: "{{HOMEPAGE_VAR_SONARR_URL}}"
-#       description: tv
-#       target: _self 
-#   - Radarr:
-#       icon: radarr.png
-#       href: "{{HOMEPAGE_VAR_RADARR_URL}}"
-#       description: movies
-#       target: _self 
-#   - Lidarr:
-#       icon: lidarr.png
-#       href: "{{HOMEPAGE_VAR_LIDARR_URL}}"
-#       description: music
-#       target: _self 
-#   - Readarr:
-#       icon: readarr.png
-#       href: "{{HOMEPAGE_VAR_READARR_URL}}"
-#       description: books
-#       target: _self 
-#   - qBittorrent:
-#       icon: qbittorrent.png
-#       href: "{{HOMEPAGE_VAR_QBITTORRENT_URL}}"
-#       description: torrents
-#       target: _self 
-#   - Bazarr:
-#       icon: bazarr.png
-#       href: "{{HOMEPAGE_VAR_BAZARR_URL}}"
-#       description: subtitles
-#       target: _self 
-#   - Prowlarr:
-#       icon: prowlarr.png
-#       href: "{{HOMEPAGE_VAR_PROWLARR_URL}}"
-#       description: indexer
-#       target: _self 
-#   - FlareSolverr:
-#       icon: flaresolverr.png
-#       href: "{{HOMEPAGE_VAR_FLARESOLVERR_URL}}"
-#       description: cloudflare bypass
-#       target: _self 
+- Servarr:
+  - Sonarr:
+      icon: sonarr.png
+      href: "{{HOMEPAGE_VAR_SONARR_URL}}"
+      description: tv
+      target: _self 
+  - Radarr:
+      icon: radarr.png
+      href: "{{HOMEPAGE_VAR_RADARR_URL}}"
+      description: movies
+      target: _self 
+  - Lidarr:
+      icon: lidarr.png
+      href: "{{HOMEPAGE_VAR_LIDARR_URL}}"
+      description: music
+      target: _self 
+  - Readarr:
+      icon: readarr.png
+      href: "{{HOMEPAGE_VAR_READARR_URL}}"
+      description: books
+      target: _self 
+  - qBittorrent:
+      icon: qbittorrent.png
+      href: "{{HOMEPAGE_VAR_QBITTORRENT_URL}}"
+      description: torrents
+      target: _self 
+  - Bazarr:
+      icon: bazarr.png
+      href: "{{HOMEPAGE_VAR_BAZARR_URL}}"
+      description: subtitles
+      target: _self 
+  - Prowlarr:
+      icon: prowlarr.png
+      href: "{{HOMEPAGE_VAR_PROWLARR_URL}}"
+      description: indexer
+      target: _self 
+  - FlareSolverr:
+      icon: flaresolverr.png
+      href: "{{HOMEPAGE_VAR_FLARESOLVERR_URL}}"
+      description: cloudflare bypass
+      target: _self 

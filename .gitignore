@@ -1,4 +1,5 @@
 /**/.env
-/docker/homepage-*
 
 /docker/codeserver/config
+
+rclone.conf

@@ -1,0 +1,11 @@
+# Sync Backups every morning @ 3:30 AM 
+30 3 * * * /sync-backups.sh
+
+# Sync Documents every morning @ 2:00 AM 
+0 2 * * * /sync-documents.sh
+
+# Sync Archive Photos Sunday morning @ 3:00 AM 
+0 3 * * 0 /sync-photo-archive.sh
+
+# Sync Family Photos Monday morning @ 3:00 AM
+0 3 * * 1 /sync-photo-family.sh

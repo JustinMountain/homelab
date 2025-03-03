@@ -1,0 +1,40 @@
+
+---
+services:
+  rclone:
+    # image: rclone/rclone:${RCLONE_VERSION}
+    build:
+      context: ./data
+      args:
+        - RCLONE_VERSION=${RCLONE_VERSION}
+    container_name: rclone
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    volumes:
+      - ./data:/config/rclone
+      - nfs-backups:/data/backups:ro
+      - nfs-documents:/data/documents:ro
+      - nfs-photos:/data/photos:ro
+    restart: unless-stopped
+
+volumes:
+  nfs-backups:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},ro,nfsvers=4
+      device: ":${NFS_ROOT_DIR}/backups"
+  nfs-documents:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},ro,nfsvers=4
+      device: ":${NFS_ROOT_DIR}/documents"
+  nfs-photos:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},ro,nfsvers=4
+      device: ":${NFS_ROOT_DIR}/photos"

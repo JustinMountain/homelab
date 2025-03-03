@@ -9,6 +9,7 @@ services:
       - TZ=${TZ}
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
       - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.igarashimountain.com`)"
       - "traefik.http.routers.jellyfin.entrypoints=https"
       - "traefik.http.routers.jellyfin.tls=true"
@@ -34,25 +35,25 @@ volumes:
     driver_opts:
       type: nfs
       o: addr=${NFS_SHARE_IP},rw,nfsvers=4
-      device: ":/Multimedia/TV"
+      device: ":${NFS_ROOT_DIR}/entertainment/tv"
   nfs-movies:
     driver: local
     driver_opts:
       type: nfs
       o: addr=${NFS_SHARE_IP},rw,nfsvers=4
-      device: ":/Multimedia/Movies"
+      device: ":${NFS_ROOT_DIR}/entertainment/movies"
   nfs-pt-tv:
     driver: local
     driver_opts:
       type: nfs
       o: addr=${NFS_SHARE_IP},rw,nfsvers=4
-      device: ":/Multimedia/Portuguese/TV"
+      device: ":${NFS_ROOT_DIR}/entertainment/portuguese/tv"
   nfs-pt-movies:
     driver: local
     driver_opts:
       type: nfs
       o: addr=${NFS_SHARE_IP},rw,nfsvers=4
-      device: ":/Multimedia/Portuguese/Movies"
+      device: ":${NFS_ROOT_DIR}/entertainment/portuguese/movies"
 
 networks:
   proxy:

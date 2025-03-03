@@ -21,24 +21,24 @@ http:
         - https-redirectscheme
       tls: {}
       service: pihole
-    proxmox:
+    stegosaurnas:
       entryPoints:
         - "https"
-      rule: "Host(`proxmox.igarashimountain.com`)"
+      rule: "Host(`stegosaurnas.igarashimountain.com`)"
       middlewares:
         - default-headers
         - https-redirectscheme
       tls: {}
-      service: proxmox
-    nas:
+      service: stegosaurnas
+    pbs:
       entryPoints:
         - "https"
-      rule: "Host(`nas.igarashimountain.com`)"
+      rule: "Host(`pbs.igarashimountain.com`)"
       middlewares:
         - default-headers
         - https-redirectscheme
       tls: {}
-      service: nas
+      service: pbs
     truenas:
       entryPoints:
         - "https"
@@ -48,33 +48,6 @@ http:
         - https-redirectscheme
       tls: {}
       service: truenas
-    nextcloud:
-      entryPoints:
-        - "https"
-      rule: "Host(`nextcloud.igarashimountain.com`)"
-      middlewares:
-        - default-headers
-        - https-redirectscheme
-      tls: {}
-      service: nextcloud
-    jellyfin:
-      entryPoints:
-        - "https"
-      rule: "Host(`jellyfin.igarashimountain.com`)"
-      middlewares:
-        - default-headers
-        - https-redirectscheme
-      tls: {}
-      service: jellyfin
-    code:
-      entryPoints:
-        - "https"
-      rule: "Host(`code.igarashimountain.com`)"
-      middlewares:
-        - default-headers
-        - https-redirectscheme
-      tls: {}
-      service: code
     torrent:
       entryPoints:
         - "https"
@@ -159,77 +132,62 @@ http:
     pihole:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.51:8080"
+          - url: "http://192.168.1.201"
         passHostHeader: true
-    proxmox:
+    stegosaurnas:
       loadBalancer:
         servers:
-          - url: "https://192.168.1.50:8006"
+          - url: "https://192.168.1.200:8006"
         passHostHeader: true
-    nas:
+    pbs:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.101:8080"
+          - url: "https://192.168.1.210:8007"
         passHostHeader: true
     truenas:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.111"
-        passHostHeader: true
-    nextcloud:
-      loadBalancer:
-        servers:
-          - url: "https://192.168.1.210"
-        passHostHeader: true
-    jellyfin:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.1.105:8096"
-        passHostHeader: true
-    code:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.1.121:8443"
+          - url: "http://192.168.1.211"
         passHostHeader: true
     torrent:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.131:8080"
+          - url: "http://192.168.1.213:8080"
         passHostHeader: true
     sonarr:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.131:8989"
+          - url: "http://192.168.1.213:8989"
         passHostHeader: true
     radarr:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.131:7878"
+          - url: "http://192.168.1.213:7878"
         passHostHeader: true
     Lidarr:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.131:8686"
+          - url: "http://192.168.1.213:8686"
         passHostHeader: true
     readarr:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.131:8787"
+          - url: "http://192.168.1.213:8787"
         passHostHeader: true
     prowlarr:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.131:9696"
+          - url: "http://192.168.1.213:9696"
         passHostHeader: true
     flaresolverr:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.131:8191"
+          - url: "http://192.168.1.213:8191"
         passHostHeader: true
     bazarr:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.131:6767"
+          - url: "http://192.168.1.213:6767"
         passHostHeader: true
 #endregion
   middlewares:

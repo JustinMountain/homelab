@@ -139,31 +139,31 @@ volumes:
     driver_opts:
       type: nfs
       o: addr=${NFS_SHARE_IP},rw,nfsvers=4
-      device: ":/Multimedia/Downloads"
+      device: ":${NFS_ROOT_DIR}/entertainment/temp"
   nfs-tv:
     driver: local
     driver_opts:
       type: nfs
       o: addr=${NFS_SHARE_IP},rw,nfsvers=4
-      device: ":/Multimedia/TV"
+      device: ":${NFS_ROOT_DIR}/entertainment/tv"
   nfs-movies:
     driver: local
     driver_opts:
       type: nfs
       o: addr=${NFS_SHARE_IP},rw,nfsvers=4
-      device: ":/Multimedia/Movies"
+      device: ":${NFS_ROOT_DIR}/entertainment/movies"
   nfs-music:
     driver: local
     driver_opts:
       type: nfs
       o: addr=${NFS_SHARE_IP},rw,nfsvers=4
-      device: ":/Multimedia/Music"
+      device: ":${NFS_ROOT_DIR}/entertainment/music"
   nfs-books:
     driver: local
     driver_opts:
       type: nfs
       o: addr=${NFS_SHARE_IP},rw,nfsvers=4
-      device: ":/Multimedia/Books"
+      device: ":${NFS_ROOT_DIR}/entertainment/books"
 
   # SMB Example
   # smb-downloads:
