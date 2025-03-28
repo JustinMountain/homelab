@@ -3,30 +3,35 @@
 # https://gethomepage.dev/configs/bookmarks
 
 - Socials:
-  - YouTube:
-    - icon: youtube.png
-      abbr: YT
-      href: https://youtube.com/
+  - GitHub:
+    - icon: github-light.png
+      abbr: GH
+      href: https://github.com/
       target: _self 
   - WhatsApp:
     - icon: whatsapp.png
       abbr: "??"
       href: https://web.whatsapp.com/
       target: _self 
-  - LinkedIn:
-    - icon: linkedin.png
-      abbr: LI
-      href: https://linkedin.com/
-      target: _self 
   - Messenger:
     - icon: facebook-messenger.png
       abbr: FB
       href: https://messenger.com/
       target: _self 
-  - GitHub:
-    - icon: github-light.png
-      abbr: GH
-      href: https://github.com/
+  - LinkedIn:
+    - icon: linkedin.png
+      abbr: LI
+      href: https://linkedin.com/
+      target: _self 
+  - YouTube:
+    - icon: youtube.png
+      abbr: YT
+      href: https://youtube.com/
+      target: _self 
+  - Reddit:
+    - icon: reddit.png
+      abbr: RE
+      href: https://reddit.com/
       target: _self 
   - This Week in Self-Hosted:
     - icon: mdi-server-outline

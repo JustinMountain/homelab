@@ -2,7 +2,7 @@
 
 echo "Rclone container initialized."
 
-/sync-backups.sh
+# /sync-backups.sh
 
 /sync-documents.sh
 

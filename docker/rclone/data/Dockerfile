@@ -2,7 +2,7 @@ ARG RCLONE_VERSION
 
 FROM rclone/rclone:${RCLONE_VERSION}
 
-COPY --chmod=755 sync-backups.sh /
+# COPY --chmod=755 sync-backups.sh /
 
 COPY --chmod=755 sync-documents.sh /
 

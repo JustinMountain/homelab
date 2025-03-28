@@ -8,11 +8,21 @@
 
 # widgets: https://gethomepage.dev/widgets/
 
-- StegosaurNAS:
-  - Proxmox:
+- Infrastructure:
+  - Unifi:
+      icon: unifi.png
+      href: "{{HOMEPAGE_VAR_UNIFI_URL}}"
+      description: router/firewall
+      target: _self 
+      widget:
+        type: unifi
+        url: "{{HOMEPAGE_VAR_UNIFI_IP}}"
+        username: "{{HOMEPAGE_VAR_UNIFI_USER}}"
+        password: "{{HOMEPAGE_VAR_UNIFI_PASSWORD}}"
+  - StegosaurNAS:
       icon: proxmox.png
       href: "{{HOMEPAGE_VAR_PROXMOX_URL}}"
-      description: virtualization
+      description: Proxmox Virtualization
       target: _self 
       widget:
         type: proxmox
@@ -30,25 +40,6 @@
         url: "{{HOMEPAGE_VAR_PBS_IP}}"
         username: "{{HOMEPAGE_VAR_PBS_API_TOKEN_ID}}"
         password: "{{HOMEPAGE_VAR_PBS_API_TOKEN_SECRET}}"
-  - Uptime Kuma:
-      icon: uptime-kuma.png
-      href: "{{HOMEPAGE_VAR_UPTIME_URL}}"
-      description: service uptime
-      target: _self 
-      widget:
-        type: uptimekuma
-        url: "{{HOMEPAGE_VAR_UPTIME_IP}}"
-        slug: "{{HOMEPAGE_VAR_UPTIME_SLUG}}"
-  - PiHole:
-      icon: pi-hole.png
-      href: "{{HOMEPAGE_VAR_PIHOLE_URL}}"
-      description: dns
-      target: _self 
-      widget:
-        type: pihole
-        url: "{{HOMEPAGE_VAR_PIHOLE_IP}}"
-        # version: 6 # required if running v6 or higher, defaults to 5
-        key: "{{HOMEPAGE_VAR_PIHOLE_API_KEY}}"
   - TrueNAS:
       icon: truenas.png
       href: "{{HOMEPAGE_VAR_TRUENAS_URL}}"
@@ -60,52 +51,55 @@
         key: "{{HOMEPAGE_VAR_TRUENAS_KEY}}"
         enablePools: true # optional, defaults to false
         nasType: scale
-  - BrontosaurNAS:
-      icon: mdi-database
-      href: "{{HOMEPAGE_VAR_NAS_URL}}"
-      description: data storage
+  - PiHole:
+      icon: pi-hole.png
+      href: "{{HOMEPAGE_VAR_PIHOLE_URL}}"
+      description: dns
       target: _self 
       widget:
-        type: qnap
-        url: "{{HOMEPAGE_VAR_NAS_IP}}"
-        username: "{{HOMEPAGE_VAR_NAS_USER}}"
-        password: "{{HOMEPAGE_VAR_NAS_PASSWORD}}"
-- Networking:
-  - OpenWRT:
-      icon: openwrt.png
-      href: "{{HOMEPAGE_VAR_OPENWRT_URL}}"
-      description: router/firewall
+        type: pihole
+        url: "{{HOMEPAGE_VAR_PIHOLE_IP}}"
+        # version: 6 # required if running v6 or higher, defaults to 5
+        key: "{{HOMEPAGE_VAR_PIHOLE_API_KEY}}"
+  - Uptime Kuma:
+      icon: uptime-kuma.png
+      href: "{{HOMEPAGE_VAR_UPTIME_URL}}"
+      description: service uptime
       target: _self 
-  - Traefik:
-      icon: traefik.png
-      href: "{{HOMEPAGE_VAR_TRAEFIK_URL}}"
-      description: proxy
-      target: _self 
+      widget:
+        type: uptimekuma
+        url: "{{HOMEPAGE_VAR_UPTIME_IP}}"
+        slug: "{{HOMEPAGE_VAR_UPTIME_SLUG}}"
 - Services:
-  - Open WebUI:
-      icon: open-webui-light.png
-      href: "{{HOMEPAGE_VAR_CHAT_URL}}"
-      description: chatbots
-      target: _self 
   - Actual Budget:
       icon: actual-budget.png
       href: "{{HOMEPAGE_VAR_ACTUAL_URL}}"
       description: budgets
-      target: _self 
-  - Jellyfin:
-      icon: jellyfin.png
-      href: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
-      description: local streaming
       target: _self 
   - Change Detection:
       icon: changedetection.png
       href: "{{HOMEPAGE_VAR_CHANGE_DETECTION_URL}}"
       description: monitor changes
       target: _self 
+  - Jellyfin:
+      icon: jellyfin.png
+      href: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
+      description: local streaming
+      target: _self 
   - Mealie:
       icon: mealie.png
       href: "{{HOMEPAGE_VAR_MEALIE_URL}}"
       description: recipes
+      target: _self 
+  - Open WebUI:
+      icon: open-webui-light.png
+      href: "{{HOMEPAGE_VAR_CHAT_URL}}"
+      description: chatbots
+      target: _self 
+  - Traefik:
+      icon: traefik.png
+      href: "{{HOMEPAGE_VAR_TRAEFIK_URL}}"
+      description: proxy
       target: _self 
 - Servarr:
   - Sonarr:

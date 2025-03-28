@@ -1,15 +1,15 @@
 http:
  #region routers 
   routers:
-    openwrt:
+    unifi:
       entryPoints:
         - "https"
-      rule: "Host(`openwrt.igarashimountain.com`)"
+      rule: "Host(`unifi.igarashimountain.com`)"
       middlewares:
         - default-headers
         - https-redirectscheme
       tls: {}
-      service: openwrt
+      service: unifi
     pihole:
       entryPoints:
         - "https"
@@ -124,7 +124,7 @@ http:
 #endregion
 #region services
   services:
-    openwrt:
+    unifi:
       loadBalancer:
         servers:
           - url: "https://192.168.1.1"
