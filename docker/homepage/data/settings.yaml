@@ -25,6 +25,11 @@ layout:
     style: row
     columns: 4
     # initiallyCollapsed: true
+  Storage & Backup:
+    header: true
+    style: row
+    columns: 4
+    initiallyCollapsed: true
   Services:
     header: true
     style: row

@@ -23,6 +23,8 @@ services:
       - 9696:9696 # Prowlarr
       - 8191:8191 # FlareSolverr
       - 6767:6767 # Bazarr
+      - 8097:8096 # Jellyfin
+      - 5055:5055 # Jellyseerr
     restart: unless-stopped
 
   qbittorrent:
@@ -131,6 +133,34 @@ services:
       - ./bazarr:/config
       - nfs-movies:/movies
       - nfs-tv:/tv
+    restart: unless-stopped
+
+  jellyseerr:
+    image: fallenbagel/jellyseerr:${JELLYSEERR_VERSION}
+    container_name: jellyseerr
+    network_mode: "service:gluetun"
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=${TZ}
+    volumes:
+      - ./jellyseerr:/app/config
+    restart: unless-stopped
+
+  jellyseerr-backend:
+    image: lscr.io/linuxserver/jellyfin:${JELLYFIN_VERSION}
+    container_name: jellyseerr-backend
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    volumes:
+      - ./jellyfin:/config
+      - nfs-movies:/data/movies
+      - nfs-tv:/data/tvshows
+    #   - 8920:8920 #optional
+    #   - 7359:7359/udp
+    #   - 1900:1900/udp #optional
     restart: unless-stopped
 
 volumes:

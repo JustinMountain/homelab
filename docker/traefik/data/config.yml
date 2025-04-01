@@ -120,6 +120,24 @@ http:
         - https-redirectscheme
       tls: {}
       service: bazarr
+    jellyseerr:
+      entryPoints:
+        - "https"
+      rule: "Host(`jellyseerr.igarashimountain.com`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: jellyseerr
+    jellyseerr-backend:
+      entryPoints:
+        - "https"
+      rule: "Host(`jellyseerr-backend.igarashimountain.com`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: jellyseerr-backend
 
 #endregion
 #region services
@@ -188,6 +206,16 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.1.213:6767"
+        passHostHeader: true
+    jellyseerr:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.213:5055"
+        passHostHeader: true
+    jellyseerr-backend:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.213:8097"
         passHostHeader: true
 #endregion
   middlewares:

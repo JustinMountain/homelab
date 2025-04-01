@@ -7,6 +7,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=${TZ}
+      # - JELLYFIN_PublishedServerUrl=https://jellyfin.igarashimountain.com
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
@@ -22,6 +23,9 @@ services:
       - nfs-tv:/data/tvshows
       - nfs-pt-movies:/data/pt-movies
       - nfs-pt-tv:/data/pt-tvshows
+      - nfs-kids-movies:/data/kids-movies
+      - nfs-kids-tv:/data/kids-tvshows
+      - nfs-concerts:/data/concerts
     ports:
       - 8096:8096
     #   - 8920:8920 #optional
@@ -54,6 +58,24 @@ volumes:
       type: nfs
       o: addr=${NFS_SHARE_IP},rw,nfsvers=4
       device: ":${NFS_ROOT_DIR}/entertainment/portuguese/movies"
+  nfs-kids-tv:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      device: ":${NFS_ROOT_DIR}/entertainment/kids/tv"
+  nfs-kids-movies:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      device: ":${NFS_ROOT_DIR}/entertainment/kids/movies"
+  nfs-concerts:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=${NFS_SHARE_IP},rw,nfsvers=4
+      device: ":${NFS_ROOT_DIR}/entertainment/concerts"
 
 networks:
   proxy:

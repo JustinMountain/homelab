@@ -30,27 +30,6 @@
         username: "{{HOMEPAGE_VAR_PROXMOX_API_TOKEN_ID}}"
         password: "{{HOMEPAGE_VAR_PROXMOX_API_TOKEN_SECRET}}"
         node: stegosaurnas
-  - Proxmox Backup Server:
-      icon: proxmox-light.png
-      href: "{{HOMEPAGE_VAR_PBS_URL}}"
-      description: backups
-      target: _self 
-      widget:
-        type: proxmoxbackupserver
-        url: "{{HOMEPAGE_VAR_PBS_IP}}"
-        username: "{{HOMEPAGE_VAR_PBS_API_TOKEN_ID}}"
-        password: "{{HOMEPAGE_VAR_PBS_API_TOKEN_SECRET}}"
-  - TrueNAS:
-      icon: truenas.png
-      href: "{{HOMEPAGE_VAR_TRUENAS_URL}}"
-      description: network storage
-      target: _self 
-      widget:
-        type: truenas
-        url: "{{HOMEPAGE_VAR_TRUENAS_IP}}"
-        key: "{{HOMEPAGE_VAR_TRUENAS_KEY}}"
-        enablePools: true # optional, defaults to false
-        nasType: scale
   - PiHole:
       icon: pi-hole.png
       href: "{{HOMEPAGE_VAR_PIHOLE_URL}}"
@@ -70,6 +49,72 @@
         type: uptimekuma
         url: "{{HOMEPAGE_VAR_UPTIME_IP}}"
         slug: "{{HOMEPAGE_VAR_UPTIME_SLUG}}"
+- Storage & Backup:
+  - TrueNAS:
+      icon: truenas.png
+      href: "{{HOMEPAGE_VAR_TRUENAS_URL}}"
+      description: network storage
+      target: _self 
+      widget:
+        type: truenas
+        url: "{{HOMEPAGE_VAR_TRUENAS_IP}}"
+        key: "{{HOMEPAGE_VAR_TRUENAS_KEY}}"
+        enablePools: true # optional, defaults to false
+        nasType: scale
+  - Proxmox Backup Server:
+      icon: proxmox-light.png
+      href: "{{HOMEPAGE_VAR_PBS_URL}}"
+      description: backups
+      target: _self 
+      widget:
+        type: proxmoxbackupserver
+        url: "{{HOMEPAGE_VAR_PBS_IP}}"
+        username: "{{HOMEPAGE_VAR_PBS_API_TOKEN_ID}}"
+        password: "{{HOMEPAGE_VAR_PBS_API_TOKEN_SECRET}}"
+  - Syncthing:
+      icon: syncthing.png
+      href: "{{HOMEPAGE_VAR_SYNCTHING_URL}}"
+      description: StegosaurNAS
+      widget:
+        type: customapi
+        url: "{{HOMEPAGE_VAR_SYNCTHING_URL}}/rest/svc/report"
+        headers:
+          X-API-Key: "{{HOMEPAGE_VAR_SYNCTHING_KEY}}" 
+        mappings:
+          - field: totMiB
+            label: Stored (MB)
+            format: number
+          - field: numFolders
+            label: Folders
+            format: number
+          - field: totFiles
+            label: Files
+            format: number
+          - field: numDevices
+            label: Devices
+            format: number
+  - Syncthing:
+      icon: syncthing.png
+      href: "{{HOMEPAGE_VAR_SYNCTHING_URL_2}}"
+      description: Ryzeratops
+      widget:
+        type: customapi
+        url: "{{HOMEPAGE_VAR_SYNCTHING_URL_2}}/rest/svc/report"
+        headers:
+          X-API-Key: "{{HOMEPAGE_VAR_SYNCTHING_KEY_2}}" 
+        mappings:
+          - field: totMiB
+            label: Stored (MB)
+            format: number
+          - field: numFolders
+            label: Folders
+            format: number
+          - field: totFiles
+            label: Files
+            format: number
+          - field: numDevices
+            label: Devices
+            format: number
 - Services:
   - Actual Budget:
       icon: actual-budget.png
@@ -102,6 +147,16 @@
       description: proxy
       target: _self 
 - Servarr:
+  - Jellyseerr:
+      icon: jellyseerr.png
+      href: "{{HOMEPAGE_VAR_JELLYSEERR_URL}}"
+      description: media explorer
+      target: _self 
+  - qBittorrent:
+      icon: qbittorrent.png
+      href: "{{HOMEPAGE_VAR_QBITTORRENT_URL}}"
+      description: torrents
+      target: _self 
   - Sonarr:
       icon: sonarr.png
       href: "{{HOMEPAGE_VAR_SONARR_URL}}"
@@ -122,11 +177,6 @@
       href: "{{HOMEPAGE_VAR_READARR_URL}}"
       description: books
       target: _self 
-  - qBittorrent:
-      icon: qbittorrent.png
-      href: "{{HOMEPAGE_VAR_QBITTORRENT_URL}}"
-      description: torrents
-      target: _self 
   - Bazarr:
       icon: bazarr.png
       href: "{{HOMEPAGE_VAR_BAZARR_URL}}"
@@ -141,4 +191,9 @@
       icon: flaresolverr.png
       href: "{{HOMEPAGE_VAR_FLARESOLVERR_URL}}"
       description: cloudflare bypass
+      target: _self 
+  - Jellyseerr Backend:
+      icon: jellyfin.png
+      href: "{{HOMEPAGE_VAR_JELLYFIN_BACKEND_URL}}"
+      description: Jellyfin
       target: _self 
