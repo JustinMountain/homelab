@@ -1,0 +1,43 @@
+---
+services:
+  searxng:
+    image: searxng/searxng:${SEARXNG_VERSION}
+    container_name: searxng
+    # ports:
+    #   - "8080:8080"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+      - SEARXNG_BASE_URL=http://localhost:8080
+      - UWSGI_WORKERS=${SEARXNG_UWSGI_WORKERS:-2}
+      - UWSGI_THREADS=${SEARXNG_UWSGI_THREADS:-2}        
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.routers.search.rule=Host(`search.igarashimountain.com`)"
+      - "traefik.http.routers.search.entrypoints=https"
+      - "traefik.http.routers.search.tls=true"
+      - "traefik.http.services.search.loadbalancer.server.port=8080"  
+    networks:
+      - proxy
+    volumes:
+      - ./data:/etc/searxng:rw
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+      - DAC_OVERRIDE
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "1"
+    restart: unless-stopped
+
+networks:
+  proxy:
+    external: true
+

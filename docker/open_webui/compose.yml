@@ -8,7 +8,12 @@ services:
     environment:
       - OPENAI_API_BASE_URLS=${OPENAI_URL};${PIPELINE_URL}
       - OPENAI_API_KEYS=${OPENAI_API_KEY};${PIPELINE_API_KEY}
-      - OLLAMA_BASE_URL=${OLLAMA_URL}
+      - OLLAMA_BASE_URL=${OLLAMA_URL}:11434
+      - ENABLE_RAG_WEB_SEARCH=True
+      - RAG_WEB_SEARCH_ENGINE=searxng
+      - RAG_WEB_SEARCH_RESULT_COUNT=3
+      - RAG_WEB_SEARCH_CONCURRENT_REQUESTS=10
+      - SEARXNG_QUERY_URL=${SEARXNG_QUERY_URL}
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"

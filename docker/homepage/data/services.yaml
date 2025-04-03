@@ -141,6 +141,11 @@
       href: "{{HOMEPAGE_VAR_CHAT_URL}}"
       description: chatbots
       target: _self 
+  - SearXNG:
+      icon: searxng.png
+      href: "{{HOMEPAGE_VAR_SEARXNG_URL}}"
+      description: search
+      target: _self 
   - Traefik:
       icon: traefik.png
       href: "{{HOMEPAGE_VAR_TRAEFIK_URL}}"
