@@ -121,15 +121,20 @@
       href: "{{HOMEPAGE_VAR_ACTUAL_URL}}"
       description: budgets
       target: _self 
-  - Change Detection:
-      icon: changedetection.png
-      href: "{{HOMEPAGE_VAR_CHANGE_DETECTION_URL}}"
-      description: monitor changes
+  - Home Assistant:
+      icon: home-assistant.png
+      href: "{{HOMEPAGE_VAR_HOMEASSISTANT_URL}}"
+      description: home automations
       target: _self 
   - Jellyfin:
       icon: jellyfin.png
       href: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
       description: local streaming
+      target: _self 
+  - Jellyseerr:
+      icon: jellyseerr.png
+      href: "{{HOMEPAGE_VAR_JELLYSEERR_URL}}"
+      description: media explorer
       target: _self 
   - Mealie:
       icon: mealie.png
@@ -141,22 +146,7 @@
       href: "{{HOMEPAGE_VAR_CHAT_URL}}"
       description: chatbots
       target: _self 
-  - SearXNG:
-      icon: searxng.png
-      href: "{{HOMEPAGE_VAR_SEARXNG_URL}}"
-      description: search
-      target: _self 
-  - Traefik:
-      icon: traefik.png
-      href: "{{HOMEPAGE_VAR_TRAEFIK_URL}}"
-      description: proxy
-      target: _self 
 - Servarr:
-  - Jellyseerr:
-      icon: jellyseerr.png
-      href: "{{HOMEPAGE_VAR_JELLYSEERR_URL}}"
-      description: media explorer
-      target: _self 
   - qBittorrent:
       icon: qbittorrent.png
       href: "{{HOMEPAGE_VAR_QBITTORRENT_URL}}"
@@ -182,15 +172,16 @@
       href: "{{HOMEPAGE_VAR_READARR_URL}}"
       description: books
       target: _self 
+- Backend Services:
   - Bazarr:
       icon: bazarr.png
       href: "{{HOMEPAGE_VAR_BAZARR_URL}}"
       description: subtitles
       target: _self 
-  - Prowlarr:
-      icon: prowlarr.png
-      href: "{{HOMEPAGE_VAR_PROWLARR_URL}}"
-      description: indexer
+  - Change Detection:
+      icon: changedetection.png
+      href: "{{HOMEPAGE_VAR_CHANGE_DETECTION_URL}}"
+      description: monitor changes
       target: _self 
   - FlareSolverr:
       icon: flaresolverr.png
@@ -201,4 +192,24 @@
       icon: jellyfin.png
       href: "{{HOMEPAGE_VAR_JELLYFIN_BACKEND_URL}}"
       description: Jellyfin
+      target: _self 
+  - Prowlarr:
+      icon: prowlarr.png
+      href: "{{HOMEPAGE_VAR_PROWLARR_URL}}"
+      description: indexer
+      target: _self 
+  - SearXNG:
+      icon: searxng.png
+      href: "{{HOMEPAGE_VAR_SEARXNG_URL}}"
+      description: search
+      target: _self 
+  - Traefik:
+      icon: traefik.png
+      href: "{{HOMEPAGE_VAR_TRAEFIK_URL}}"
+      description: proxy
+      target: _self 
+  - Zigbee2MQTT:
+      icon: zigbee2mqtt.png
+      href: "{{HOMEPAGE_VAR_ZIGBEE2MQTT_URL}}"
+      description: zigbee to mqtt bridge
       target: _self 
